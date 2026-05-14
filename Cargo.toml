@@ -1,0 +1,9 @@
+[package]
+name = "fimbulfamb_api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rand = "0.10.1"
+rocket = {version = "0.5.1", features = ["json"]}
+serde = "1.0.228"
