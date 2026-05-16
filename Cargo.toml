@@ -6,4 +6,7 @@ edition = "2024"
 [dependencies]
 rand = "0.10.1"
 rocket = {version = "0.5.1", features = ["json"]}
+rocket_cors = "0.6.0"
+rocket_ws = "0.1.1"
 serde = "1.0.228"
+tokio = "1.52.3"

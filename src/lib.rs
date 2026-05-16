@@ -1,11 +1,14 @@
 use std::io::{BufReader, BufRead};
 use std::fs::OpenOptions;
 use serde::Serialize;
+use rand::seq::IndexedRandom;
+
 
 #[derive(Serialize)]
+#[derive(Clone)]
 pub struct Word {
     pub word: String,
-    pub definitions: Vec<String>,
+    pub definition: String//definitions: Vec<String>,
 }
 
 pub fn read_words_and_definitions_from_file(file_path: &str) -> Vec<Word> {
@@ -39,8 +42,24 @@ pub fn read_words_and_definitions_from_file(file_path: &str) -> Vec<Word> {
             if split.len() > 1 {
                 let word = split[0].to_string();
                 let definitions = split[1..].iter().map(|s| s.trim().to_string()).collect::<Vec<String>>();
-                words.push(Word { word, definitions });
+                words.push(Word { word: word, definition: definitions[0].to_string() });
             }
         }
     return words;
+}
+
+
+pub fn generate_code() -> String {
+    let chars: Vec<char> = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".chars().collect();
+    let mut rng = rand::rng();
+    let mut code_vec = vec![];
+    while code_vec.len() < 6 {
+        let c = match chars.choose(&mut rng) {
+            Some(c) => c,
+            None => continue
+        };
+        code_vec.push(c)
+    }
+
+    code_vec.into_iter().collect()
 }
