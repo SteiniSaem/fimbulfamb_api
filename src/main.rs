@@ -7,58 +7,60 @@ use rocket_cors::{CorsOptions, AllowedOrigins};
 use fimbulfamb_api::{Word, generate_code, read_words_and_definitions_from_file};
 use rocket::State;
 use rocket::serde::json::Json;
-use rand::seq::IndexedRandom;
 use crate::game::Game;
 use std::sync::Mutex;
 use serde::Serialize;
 use rocket::http::Status;
+use rocket::futures::{SinkExt};
 
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
 }
 
-#[get("/getRandomWord")]
-fn get_random_word(words: &State<Vec<Word>>) -> Result<Json<&Word>, (Status, String)> {
-    let mut rng = rand::rng();
-    let word = match words.choose(&mut rng){
-        Some(w) => w,
-        None => {
-            eprintln!("Failed to choose a random word from the list");
-            return Err((Status::NoContent, String::from("Word list is empty")));
-        }
-    };
-    Ok(Json(word))
-}
-
 #[put("/createNewGame/<owner_name>")]
-fn create_new_game(games: &State<Mutex<HashMap<String, Game>>>, owner_name: &str) -> String {
+fn create_new_game(games: &State<Mutex<HashMap<String, Game>>>, owner_name: &str, words: &State<Vec<Word>>) -> String {
     let mut games = games.lock().unwrap();
     let code = generate_code();
-    let new_game = Game::new(&owner_name);
+    let new_game = Game::new(&owner_name, &words);
     games.insert(code.clone(), new_game);
     code
 }
 
 #[put("/startGame/<id>")]
-fn start_game(games: &State<Mutex<HashMap<String, Game>>>, words: &State<Vec<Word>>, id: &str) -> Result<String, (Status, String)> {
+fn start_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<String, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
         None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
     };
 
-    let mut rng = rand::rng();
-    let word: &fimbulfamb_api::Word = match words.choose(&mut rng){
-        Some(w) => w,
+    game.start_game();
+    let current_player = game.get_current_player();
+    let _ = game.tx.send(format!("Start Game\t{}", current_player));
+    Ok("Success".to_string())
+}
+
+#[put("/nextRound/<id>")]
+fn next_round(games: &State<Mutex<HashMap<String, Game>>>, id: &str,) -> Result<(), (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
         None => {
-            eprintln!("Failed to choose a random word from the list");
-            return Err((Status::NoContent, String::from("Word list is empty")));
+            return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
         }
     };
 
-    game.start_game(&word);
-    Ok("Success".to_string())
+    match game.next_round() {
+        Ok(_) => {
+            let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+        },
+        Err(err) => {
+            let _ = game.tx.send(format!("Error\t{}", err));
+            return Err((Status::NoContent, format!("{}", err)))
+        }
+    }
+    Ok(())
 }
 
 #[get("/hasGameStarted/<id>")]
@@ -98,6 +100,7 @@ fn join_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str, username: &s
             owner: game.owner.clone(),
             players: game.players.clone(),
         };
+        let _ = game.tx.send(format!("New Player\t{}", username));
         return Ok(Json(response))
     }
     else {
@@ -124,7 +127,7 @@ fn get_current_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Op
         Some(g) => g,
         None => return None
     };
-    Some(Json(game.current_word.clone()))
+    Some(Json(game.get_current_word()))
 }
 
 
@@ -136,9 +139,22 @@ fn end_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> String {
 }
 
 
+#[get("/game/<id>/ws")]
+async fn game_ws<'a>(id: &str, ws: rocket_ws::WebSocket, games: &State<Mutex<HashMap<String, Game>>>) -> rocket_ws::Channel<'static> {
+    let mut rx = games.lock().unwrap().get(id).unwrap().tx.subscribe();
+    ws.channel(move |mut stream| Box::pin(async move {
+        while let Ok(msg) = rx.recv().await {
+            stream.send(msg.into()).await?;
+        }
+        Ok(())
+    }))
+}
+
+
 #[launch]
 fn rocket() -> _ {
     let words = read_words_and_definitions_from_file("words.txt");
+
     let games: Mutex<HashMap<String, Game>> = Mutex::new(HashMap::new());
 
     let cors = CorsOptions::default()
@@ -152,14 +168,15 @@ fn rocket() -> _ {
         .manage(games)
         .mount("/", routes![
             index,
-            get_random_word,
             create_new_game,
             end_game,
             start_game,
             join_game,
             get_players,
             has_game_started,
-            get_current_word
+            get_current_word,
+            next_round,
+            game_ws
         ])
 }
 

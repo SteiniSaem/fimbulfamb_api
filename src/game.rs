@@ -1,6 +1,9 @@
 
 use serde::Serialize;
 use fimbulfamb_api::Word;
+use tokio::sync::broadcast;
+use rand::seq::SliceRandom;
+
 
 #[derive(Serialize)]
 #[derive(Clone)]
@@ -12,21 +15,28 @@ pub struct Player {
 pub struct Game {
     pub owner: String,
     pub players: Vec<Player>,
-    pub turn: usize, //index to the player whose turn it currently is
-    pub current_word: Word,
-    pub used_words: Vec<String>,
+    pub current_player_index: usize, // index to the player whose turn it currently is
+    pub word_pool: Vec<Word>,
+    pub current_word_index: usize, // index to the current word in the word pool
     pub has_started: bool,
+    pub tx: broadcast::Sender<String>
 }
 
 impl Game {
-    pub fn new(owner_name: &str) -> Self {
+    pub fn new(owner_name: &str, words: &Vec<Word>) -> Self {
+        let mut rng = rand::rng();
+        let mut word_pool = words.clone();
+        word_pool.shuffle(&mut rng);
+
+        let (tx, _) = broadcast::channel(16);
         Self {
             owner: owner_name.to_string(),
             players: vec![Player {name: owner_name.to_string(), points: 0}],
-            turn: 0,
-            current_word: Word { word: String::new(), definition: String::new()},
-            used_words: vec![],
-            has_started: false
+            current_player_index: 0,
+            word_pool: word_pool,
+            current_word_index: 0,
+            has_started: false,
+            tx: tx
         }
     }
 
@@ -40,16 +50,32 @@ impl Game {
         }
     }
 
-    pub fn next_turn(&mut self) {
-        if self.turn == self.players.len() - 1 {
-            self.turn = 0;
+    pub fn next_round(&mut self) -> Result<(), String> {
+        if self.current_player_index == self.players.len() - 1 {
+            self.current_player_index = 0;
         } else {
-            self.turn += 1;
+            self.current_player_index += 1;
         }
+
+        if self.current_word_index == self.word_pool.len() -1 {
+            return Err(String::from("No more words"))
+        }
+        else {
+            self.current_word_index += 1
+        }
+        Ok(())
     }
 
-    pub fn start_game(&mut self, word: &Word) {
+    pub fn get_current_player(&self) -> String{
+        let current_player = &self.players[self.current_player_index];
+        return current_player.name.to_string()
+    }
+
+    pub fn get_current_word(&self) -> Word {
+        return self.word_pool[self.current_word_index].clone();
+    }
+
+    pub fn start_game(&mut self) {
         self.has_started = true;
-        self.current_word = Word {word: word.word.to_string(), definition: word.definition.to_string()};
     }
 }
