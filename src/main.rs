@@ -9,7 +9,7 @@ use rocket::State;
 use rocket::serde::json::Json;
 use crate::game::Game;
 use std::sync::Mutex;
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 use rocket::http::Status;
 use rocket::futures::{SinkExt};
 
@@ -41,6 +41,20 @@ fn start_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<S
     Ok("Success".to_string())
 }
 
+#[get("/nextWord/<id>")]
+fn next_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<Word>, (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+    };
+
+    match game.next_word() {
+        Ok(w) => return Ok(Json(w)),
+        Err(err) => return Err((Status::NoContent, format!("{}", err)))
+    };
+}
+
 #[put("/nextRound/<id>")]
 fn next_round(games: &State<Mutex<HashMap<String, Game>>>, id: &str,) -> Result<(), (Status, String)> {
     let mut games = games.lock().unwrap();
@@ -60,6 +74,34 @@ fn next_round(games: &State<Mutex<HashMap<String, Game>>>, id: &str,) -> Result<
             return Err((Status::NoContent, format!("{}", err)))
         }
     }
+    Ok(())
+}
+
+#[derive(Deserialize)]
+struct SubmitDefinitionRequest {
+    username: String,
+    definition: String
+}
+
+#[put("/submitDefinition/<id>", data="<body>")]
+fn submit_definition(games: &State<Mutex<HashMap<String, Game>>>, id: &str, body: Json<SubmitDefinitionRequest>) -> Result<(), (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => {
+            return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        }
+    };
+
+    if !game.open_for_submissions {
+        return Err((Status::NotFound, format!("Lokað fyrir nýjar skýringar")))
+    }
+
+    let username = &body.username;
+    let definition = &body.definition;
+
+    let _ = game.tx.send(format!("Definition\t{}\t{}", username, definition));
+
     Ok(())
 }
 
@@ -130,6 +172,28 @@ fn get_current_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Op
     Some(Json(game.get_current_word()))
 }
 
+#[put("/openForSubmissions/<id>")]
+fn open_for_submissions(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+    };
+    game.open_for_submissions = true;
+    Ok(Json(true))
+}
+
+#[put("/closeForSubmissions/<id>")]
+fn close_for_submissions(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+    };
+    game.open_for_submissions = false;
+    Ok(Json(true))
+}
+
 
 #[delete("/endGame/<id>")]
 fn end_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> String {
@@ -176,6 +240,10 @@ fn rocket() -> _ {
             has_game_started,
             get_current_word,
             next_round,
+            next_word,
+            open_for_submissions,
+            close_for_submissions,
+            submit_definition,
             game_ws
         ])
 }
