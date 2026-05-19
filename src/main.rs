@@ -105,6 +105,40 @@ fn submit_definition(games: &State<Mutex<HashMap<String, Game>>>, id: &str, body
     Ok(())
 }
 
+#[derive(Deserialize)]
+struct UpdateScoresRequest {
+    players: Vec<Player>
+}
+
+#[put("/updateScores/<id>", data="<body>")]
+fn update_scores(games: &State<Mutex<HashMap<String, Game>>>, id: &str, body: Json<UpdateScoresRequest>) -> Result<Json<bool>, (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+    };
+
+    //update scores in the game object
+    for player in body.players.iter() {
+        match game.update_player_score(&player.name, player.points) {
+            Ok(_) => (),
+            Err(err) => return Err((Status::NotFound, format!("{}", err)))
+        }
+    };
+
+    // create string to send to frontend
+    let scores: Vec<String> = body.players.iter()
+        .map(|p| format!("{}\t{}", p.name, p.points))
+        .collect();
+
+    let message = format!("Scores\t{}", scores.join("\t"));
+
+    let _ = game.tx.send(message);
+    
+    Ok(Json(true))
+}
+
+
 #[get("/hasGameStarted/<id>")]
 fn has_game_started(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
     let games = games.lock().unwrap();
@@ -194,7 +228,6 @@ fn close_for_submissions(games: &State<Mutex<HashMap<String, Game>>>, id: &str) 
     Ok(Json(true))
 }
 
-
 #[delete("/endGame/<id>")]
 fn end_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> String {
     let mut games = games.lock().unwrap();
@@ -244,6 +277,7 @@ fn rocket() -> _ {
             open_for_submissions,
             close_for_submissions,
             submit_definition,
+            update_scores,
             game_ws
         ])
 }

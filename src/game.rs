@@ -1,10 +1,10 @@
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use fimbulfamb_api::Word;
 use tokio::sync::broadcast;
 use rand::seq::SliceRandom;
 
-
+#[derive(Deserialize)]
 #[derive(Serialize)]
 #[derive(Clone)]
 pub struct Player {
@@ -66,6 +66,16 @@ impl Game {
             self.current_word_index += 1
         }
         Ok(())
+    }
+
+    pub fn update_player_score(&mut self, name: &str, points: i16) -> Result<(), String>{
+        if let Some(player) = self.players.iter_mut().find(|p| p.name == name){
+            player.points = points;
+            return Ok(())
+        }
+        else {
+            return Err(format!("No player with name {}", name))
+        }
     }
 
     pub fn get_current_player(&self) -> String{
