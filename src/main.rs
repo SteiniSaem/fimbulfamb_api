@@ -1,17 +1,23 @@
 #[macro_use] extern crate rocket;
 mod game;
+mod middleware;
+mod utils;
+use middleware::PingFairing;
 use game::Player;
 use std::collections::HashMap;
 use std::vec;
 use rocket_cors::{CorsOptions, AllowedOrigins};
-use fimbulfamb_api::{Word, generate_code, read_words_and_definitions_from_file};
+use utils::{Word, generate_code, read_words_and_definitions_from_file};
 use rocket::State;
 use rocket::serde::json::Json;
 use crate::game::Game;
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use serde::{Serialize, Deserialize};
 use rocket::http::Status;
 use rocket::futures::{SinkExt};
+use tokio::time::{interval, Duration};
+use std::time::{SystemTime, UNIX_EPOCH};
+
 
 #[get("/")]
 fn index() -> &'static str {
@@ -19,7 +25,7 @@ fn index() -> &'static str {
 }
 
 #[put("/createNewGame/<owner_name>")]
-fn create_new_game(games: &State<Mutex<HashMap<String, Game>>>, owner_name: &str, words: &State<Vec<Word>>) -> String {
+fn create_new_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, owner_name: &str, words: &State<Vec<Word>>) -> String {
     let mut games = games.lock().unwrap();
     let code = generate_code();
     let new_game = Game::new(&owner_name, &words);
@@ -28,11 +34,11 @@ fn create_new_game(games: &State<Mutex<HashMap<String, Game>>>, owner_name: &str
 }
 
 #[put("/startGame/<id>")]
-fn start_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<String, (Status, String)> {
+fn start_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<String, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
 
     game.start_game();
@@ -42,11 +48,11 @@ fn start_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<S
 }
 
 #[get("/nextWord/<id>")]
-fn next_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<Word>, (Status, String)> {
+fn next_word(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<Word>, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
 
     match game.next_word() {
@@ -56,12 +62,12 @@ fn next_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Js
 }
 
 #[put("/nextRound/<id>")]
-fn next_round(games: &State<Mutex<HashMap<String, Game>>>, id: &str,) -> Result<(), (Status, String)> {
+fn next_round(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str,) -> Result<(), (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
         None => {
-            return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+            return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
         }
     };
 
@@ -84,12 +90,12 @@ struct SubmitDefinitionRequest {
 }
 
 #[put("/submitDefinition/<id>", data="<body>")]
-fn submit_definition(games: &State<Mutex<HashMap<String, Game>>>, id: &str, body: Json<SubmitDefinitionRequest>) -> Result<(), (Status, String)> {
+fn submit_definition(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: Json<SubmitDefinitionRequest>) -> Result<(), (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
         None => {
-            return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+            return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
         }
     };
 
@@ -111,11 +117,11 @@ struct UpdateScoresRequest {
 }
 
 #[put("/updateScores/<id>", data="<body>")]
-fn update_scores(games: &State<Mutex<HashMap<String, Game>>>, id: &str, body: Json<UpdateScoresRequest>) -> Result<Json<bool>, (Status, String)> {
+async fn update_scores(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: Json<UpdateScoresRequest>) -> Result<Json<bool>, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
 
     //update scores in the game object
@@ -140,31 +146,36 @@ fn update_scores(games: &State<Mutex<HashMap<String, Game>>>, id: &str, body: Js
 
 
 #[get("/hasGameStarted/<id>")]
-fn has_game_started(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
+fn has_game_started(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
     let games = games.lock().unwrap();
     let game = match games.get(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
 
     Ok(Json(game.has_started))
 }
 
+#[derive(Deserialize)]
+struct JoinGameRequest {
+    username: String
+}
 
 #[derive(Serialize)]
 struct JoinGameResponse {
     id: String,
-    owner: String,
     players: Vec<Player>,
 }
 
-#[put("/joinGame/<id>/<username>")]
-fn join_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str, username: &str) -> Result<Json<JoinGameResponse>, (Status, String)> {
+#[put("/joinGame/<id>", data="<body>")]
+fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: Json<JoinGameRequest>) -> Result<Json<JoinGameResponse>, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
+
+    let username = &body.username;
 
     if !game.has_started {
         match game.add_player(&username) {
@@ -173,7 +184,6 @@ fn join_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str, username: &s
         };
         let response = JoinGameResponse {
             id: id.to_string(),
-            owner: game.owner.clone(),
             players: game.players.clone(),
         };
         let _ = game.tx.send(format!("New Player\t{}", username));
@@ -184,9 +194,53 @@ fn join_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str, username: &s
     }
 }
 
+#[derive(Deserialize)]
+struct LeaveGameRequest {
+    name: String,
+}
+#[put("/leaveGame/<id>", data="<body>")]
+fn leave_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: Json<LeaveGameRequest>) -> Result<(), (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => {
+            return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+        }
+    };
+    if game.players.len() == 1 {
+        games.remove(id);
+        return Ok(());
+    }
+
+    let quitter = &body.name;
+
+    if quitter == &game.get_current_player() {
+        match game.next_round() {
+            Ok(_) => {
+                let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+            },
+            Err(err) => {
+                let _ = game.tx.send(format!("Error\t{}", err));
+                return Err((Status::NoContent, format!("{}", err)))
+            }
+        }
+    }
+
+    game.remove_player(quitter);
+    let _ = game.tx.send(format!("Quitter\t{}", quitter));
+
+    if quitter == &game.owner {
+        game.owner = game.players[0].name.clone();
+        let _ = game.tx.send(format!("New Owner\t{}", game.owner));
+    }
+
+
+    Ok(())
+}
+
 
 #[get("/players/<id>")]
-fn get_players(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Option<Json<Vec<Player>>> {
+fn get_players(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Option<Json<Vec<Player>>> {
     let games = games.lock().unwrap();
     let game = match games.get(id) {
         Some(g) => g,
@@ -197,7 +251,7 @@ fn get_players(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Option<
 
 
 #[get("/currentWord/<id>")]
-fn get_current_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Option<Json<Word>> {
+fn get_current_word(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Option<Json<Word>> {
     let games = games.lock().unwrap();
     let game = match games.get(id) {
         Some(g) => g,
@@ -207,37 +261,49 @@ fn get_current_word(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Op
 }
 
 #[put("/openForSubmissions/<id>")]
-fn open_for_submissions(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
+fn open_for_submissions(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
     game.open_for_submissions = true;
     Ok(Json(true))
 }
 
 #[put("/closeForSubmissions/<id>")]
-fn close_for_submissions(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
+fn close_for_submissions(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
     let mut games = games.lock().unwrap();
     let game = match games.get_mut(id) {
         Some(g) => g,
-        None => return Err((Status::NotFound, format!("Game with id {} doesn't exist", id)))
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
     game.open_for_submissions = false;
     Ok(Json(true))
 }
 
+#[put("/ping/<id>")]
+fn ping(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+    game.update_timestamp();
+    Ok(Json(true))
+}
+
 #[delete("/endGame/<id>")]
-fn end_game(games: &State<Mutex<HashMap<String, Game>>>, id: &str) -> String {
+fn end_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> String {
     let mut games = games.lock().unwrap();
     games.remove_entry(id);
     id.to_string()
 }
 
 
+
 #[get("/game/<id>/ws")]
-async fn game_ws<'a>(id: &str, ws: rocket_ws::WebSocket, games: &State<Mutex<HashMap<String, Game>>>) -> rocket_ws::Channel<'static> {
+async fn game_ws<'a>(id: &str, ws: rocket_ws::WebSocket, games: &State<Arc<Mutex<HashMap<String, Game>>>>) -> rocket_ws::Channel<'static> {
     let mut rx = games.lock().unwrap().get(id).unwrap().tx.subscribe();
     ws.channel(move |mut stream| Box::pin(async move {
         while let Ok(msg) = rx.recv().await {
@@ -248,19 +314,39 @@ async fn game_ws<'a>(id: &str, ws: rocket_ws::WebSocket, games: &State<Mutex<Has
 }
 
 
-#[launch]
-fn rocket() -> _ {
+#[rocket::main]
+async fn main() {
     let words = read_words_and_definitions_from_file("words.txt");
 
-    let games: Mutex<HashMap<String, Game>> = Mutex::new(HashMap::new());
+    let games: Arc<Mutex<HashMap<String, Game>>> = Arc::new(Mutex::new(HashMap::new()));
 
     let cors = CorsOptions::default()
         .allowed_origins(AllowedOrigins::some_exact(&["http://localhost:5173"]))
         .to_cors()
         .unwrap();
 
+    let games_clone = Arc::clone(&games);
+
+    tokio::spawn(async move {
+        let mut ticker = interval(Duration::from_secs(60)); // every minute
+        loop {
+            ticker.tick().await;
+            let now = SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_secs();
+
+            let mut games = games_clone.lock().unwrap();
+            games.retain(|_, game| {
+                now - game.time_of_last_activity < 3600 // keep if less than 1 hour
+            });
+        }
+    });
+
+
     rocket::build()
         .attach(cors)
+        .attach(PingFairing)
         .manage(words)
         .manage(games)
         .mount("/", routes![
@@ -269,6 +355,7 @@ fn rocket() -> _ {
             end_game,
             start_game,
             join_game,
+            leave_game,
             get_players,
             has_game_started,
             get_current_word,
@@ -276,9 +363,13 @@ fn rocket() -> _ {
             next_word,
             open_for_submissions,
             close_for_submissions,
+            ping,
             submit_definition,
             update_scores,
             game_ws
         ])
+        .launch()
+        .await
+        .unwrap();
 }
 

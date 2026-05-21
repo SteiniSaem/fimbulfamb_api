@@ -1,8 +1,9 @@
 
+use super::utils::Word;
 use serde::{Deserialize, Serialize};
-use fimbulfamb_api::Word;
 use tokio::sync::broadcast;
 use rand::seq::SliceRandom;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(Deserialize)]
 #[derive(Serialize)]
@@ -20,7 +21,8 @@ pub struct Game {
     pub current_word_index: usize, // index to the current word in the word pool
     pub has_started: bool,
     pub open_for_submissions: bool,
-    pub tx: broadcast::Sender<String>
+    pub tx: broadcast::Sender<String>,
+    pub time_of_last_activity: u64
 }
 
 impl Game {
@@ -28,6 +30,10 @@ impl Game {
         let mut rng = rand::rng();
         let mut word_pool = words.clone();
         word_pool.shuffle(&mut rng);
+        let now = match SystemTime::now().duration_since(UNIX_EPOCH) {
+            Ok(n) => n.as_secs(),
+            Err(_) => panic!("SystemTime before UNIX EPOCH!"),
+        };
 
         let (tx, _) = broadcast::channel(16);
         Self {
@@ -38,7 +44,8 @@ impl Game {
             current_word_index: 0,
             open_for_submissions: true,
             has_started: false,
-            tx: tx
+            tx: tx,
+            time_of_last_activity: now,
         }
     }
 
@@ -50,6 +57,13 @@ impl Game {
         else{
             return Err(String::from("Name taken"))
         }
+    }
+
+    pub fn remove_player(&mut self, name: &str) {
+        match self.players.iter().position(|p| p.name == name) {
+            Some(i) => self.players.remove(i),
+            None => return
+        };
     }
 
     pub fn next_round(&mut self) -> Result<(), String> {
@@ -100,4 +114,24 @@ impl Game {
     pub fn start_game(&mut self) {
         self.has_started = true;
     }
+
+    pub fn update_timestamp(&mut self) {
+        self.time_of_last_activity = match SystemTime::now().duration_since(UNIX_EPOCH) {
+            Ok(n) => n.as_secs(),
+            Err(_) => panic!("SystemTime before UNIX EPOCH!"),
+        };
+    }
 }
+
+
+/*
+#[cfg(test)]
+mod tests {
+    use crate::utils::Word;
+
+    #[test]
+    fn remove_player() {
+        let words: Vec<Word> = Vec::new();
+        let game = super::Game::new("Bogdan", &words);
+    }
+}*/
