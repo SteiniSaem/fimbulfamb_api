@@ -1,0 +1,40 @@
+# .github/workflows/deploy.yml
+name: Deploy to Raspberry Pi
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3.6.0
+
+      - name: Install Rust target for Pi
+        run: |
+          rustup target add armv7-unknown-linux-gnueabihf
+          sudo apt-get install -y gcc-arm-linux-gnueabihf
+
+      - name: Build
+        run: cargo build --release --target armv7-unknown-linux-gnueabihf
+
+      - name: Upload to Pi
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.PI_HOST }}
+          username: ${{ secrets.PI_USER }}
+          key: ${{ secrets.PI_SSH_KEY }}
+          source: target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api
+          target: ~/fimbulfamb_api
+
+      - name: Restart app on Pi
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.PI_HOST }}
+          username: ${{ secrets.PI_USER }}
+          key: ${{ secrets.PI_SSH_KEY }}
+          script: |
+            pkill fimbulfamb_api || true
+            ~/fimbulfamb_api/target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api &
