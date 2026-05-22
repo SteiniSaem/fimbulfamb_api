@@ -57,7 +57,7 @@ fn next_word(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Resu
 
     match game.next_word() {
         Ok(w) => return Ok(Json(w)),
-        Err(err) => return Err((Status::NoContent, format!("{}", err)))
+        Err(err) => return Err((Status::NotAcceptable, format!("{}", err)))
     };
 }
 
@@ -77,7 +77,7 @@ fn next_round(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str,) -> Re
         },
         Err(err) => {
             let _ = game.tx.send(format!("Error\t{}", err));
-            return Err((Status::NoContent, format!("{}", err)))
+            return Err((Status::NotAcceptable, format!("{}", err)))
         }
     }
     Ok(())
@@ -164,6 +164,7 @@ struct JoinGameRequest {
 #[derive(Serialize)]
 struct JoinGameResponse {
     id: String,
+    owner: String,
     players: Vec<Player>,
 }
 
@@ -184,6 +185,7 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
         };
         let response = JoinGameResponse {
             id: id.to_string(),
+            owner: game.owner.clone(),
             players: game.players.clone(),
         };
         let _ = game.tx.send(format!("New Player\t{}", username));
@@ -221,7 +223,7 @@ fn leave_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: 
             },
             Err(err) => {
                 let _ = game.tx.send(format!("Error\t{}", err));
-                return Err((Status::NoContent, format!("{}", err)))
+                return Err((Status::NotAcceptable, format!("{}", err)))
             }
         }
     }

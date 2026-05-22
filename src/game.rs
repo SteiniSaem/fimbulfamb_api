@@ -55,7 +55,7 @@ impl Game {
             Ok(self.players.push(new_player))
         }
         else{
-            return Err(String::from("Name taken"))
+            return Err(String::from("Nafn frátekið"))
         }
     }
 
@@ -74,7 +74,7 @@ impl Game {
         }
 
         if self.current_word_index == self.word_pool.len() -1 {
-            return Err(String::from("No more words"))
+            return Err(String::from("Öll orð búin"))
         }
         else {
             self.current_word_index += 1
@@ -88,7 +88,7 @@ impl Game {
             return Ok(())
         }
         else {
-            return Err(format!("No player with name {}", name))
+            return Err(format!("Enginn leikmaður sem heitir {}", name))
         }
     }
 
@@ -103,7 +103,7 @@ impl Game {
 
     pub fn next_word(&mut self) -> Result<Word, String> {
         if self.current_word_index == self.word_pool.len() - 1 {
-            return Err(String::from("No more words"))
+            return Err(String::from("Öll orð búin"))
         }
         else {
             self.current_word_index += 1;
