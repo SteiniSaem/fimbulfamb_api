@@ -29,8 +29,8 @@ jobs:
           host: ${{ secrets.PI_HOST }}
           username: ${{ secrets.PI_USER }}
           key: ${{ secrets.PI_SSH_KEY }}
-          source: target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api
-          target: ~/fimbulfamb_api
+          source: target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api, Rocket.toml, words.txt
+          target: ~APIs/fimbulfamb_api
 
       - name: Restart app on Pi
         uses: appleboy/ssh-action@v1.2.5
@@ -40,4 +40,4 @@ jobs:
           key: ${{ secrets.PI_SSH_KEY }}
           script: |
             pkill fimbulfamb_api || true
-            ~/fimbulfamb_api/target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api &
+            ~APIs/fimbulfamb_api/target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api &
