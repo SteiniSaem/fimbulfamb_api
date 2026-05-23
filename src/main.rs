@@ -333,8 +333,11 @@ async fn main() {
 
     let games: Arc<Mutex<HashMap<String, Game>>> = Arc::new(Mutex::new(HashMap::new()));
 
+    let figment = rocket::Config::figment();
+    let allowed_origins: Vec<String> = figment.extract_inner("allowed_origins").unwrap_or_default();
+
     let cors = CorsOptions::default()
-        .allowed_origins(AllowedOrigins::some_exact(&["http://localhost:5173"]))
+        .allowed_origins(AllowedOrigins::some_exact(&allowed_origins.iter().map(|s| s.as_str()).collect::<Vec<_>>()))
         .to_cors()
         .unwrap();
 
