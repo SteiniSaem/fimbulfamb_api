@@ -97,9 +97,19 @@ impl Game {
         return current_player.name.to_string()
     }
 
+    pub fn get_next_player(&self) -> String{
+        if self.current_player_index == self.players.len() - 1 {
+            return self.players[0].name.clone();
+        } else {
+            return self.players[self.current_player_index + 1].name.clone();
+        }
+    }
+
+
     pub fn get_current_word(&self) -> Word {
         return self.word_pool[self.current_word_index].clone();
     }
+
 
     pub fn next_word(&mut self) -> Result<Word, String> {
         if self.current_word_index == self.word_pool.len() - 1 {

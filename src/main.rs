@@ -215,26 +215,37 @@ fn leave_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: 
     }
 
     let quitter = &body.name;
-
-    if quitter == &game.get_current_player() {
-        match game.next_round() {
-            Ok(_) => {
-                let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
-            },
-            Err(err) => {
-                let _ = game.tx.send(format!("Error\t{}", err));
-                return Err((Status::NotAcceptable, format!("{}", err)))
-            }
-        }
-    }
-
+    // find who next player should be if current player is removed
+    let next_player_name = game.get_next_player();
+    let current_player_name = game.get_current_player();
     game.remove_player(quitter);
+
     let _ = game.tx.send(format!("Quitter\t{}", quitter));
 
-    if quitter == &game.owner {
+    if quitter == &game.owner { // owner is always the first in the players list so just put the new first one as owner
         game.owner = game.players[0].name.clone();
         let _ = game.tx.send(format!("New Owner\t{}", game.owner));
     }
+
+    if quitter == &current_player_name { // if current player is removed, find index of next_player and set current_player_index to that
+        let idx = match game.players.iter().position(|p| p.name == next_player_name) {
+            Some(i) => i,
+            None => return Err((Status::NotFound, String::from("Fann ekki næsta leikmann")))
+        };
+
+        game.current_player_index = idx;
+        let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+
+    }
+    else { // if quitter is not current player, find the index of current player after having removed qutter
+        let idx = match game.players.iter().position(|p| p.name == current_player_name) {
+            Some(i) => i,
+            None => return Err((Status::NotFound, String::from("Fann ekki næsta leikmann")))
+        };
+
+        game.current_player_index = idx;
+    }
+
 
 
     Ok(())

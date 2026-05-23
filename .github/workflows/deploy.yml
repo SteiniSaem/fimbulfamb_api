@@ -32,12 +32,11 @@ jobs:
           source: target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api,Rocket.toml,words.txt
           target: ~/APIs/fimbulfamb_api
 
-      - name: Restart app on Pi
+      - name: Restart service
         uses: appleboy/ssh-action@v1.2.5
         with:
-          host: ${{ secrets.PI_HOST }}
-          username: ${{ secrets.PI_USER }}
-          key: ${{ secrets.PI_SSH_KEY }}
-          script: |
-            pkill fimbulfamb_api || true
-            ~/APIs/fimbulfamb_api/target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api &
+            host: ${{ secrets.PI_HOST }}
+            username: ${{ secrets.PI_USER }}
+            key: ${{ secrets.PI_SSH_KEY }}
+            port: 22
+            script: sudo systemctl restart fimbulfamb_api
