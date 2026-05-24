@@ -10,7 +10,7 @@ use rocket_cors::{CorsOptions, AllowedOrigins};
 use utils::{Word, generate_code, read_words_and_definitions_from_file};
 use rocket::State;
 use rocket::serde::json::Json;
-use crate::game::Game;
+use crate::game::{Definition, Game};
 use std::sync::{Arc, Mutex};
 use serde::{Serialize, Deserialize};
 use rocket::http::Status;
@@ -106,6 +106,8 @@ fn submit_definition(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str,
     let username = &body.username;
     let definition = &body.definition;
 
+    game.add_definition(&username, &definition);
+
     let _ = game.tx.send(format!("Definition\t{}\t{}", username, definition));
 
     Ok(())
@@ -166,6 +168,9 @@ struct JoinGameResponse {
     id: String,
     owner: String,
     players: Vec<Player>,
+    current_player: String,
+    player_definitions: Vec<Definition>,
+    current_word: Word
 }
 
 #[put("/joinGame/<id>", data="<body>")]
@@ -187,6 +192,9 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
             id: id.to_string(),
             owner: game.owner.clone(),
             players: game.players.clone(),
+            current_player: game.get_current_player(),
+            player_definitions: game.player_definitions.clone(),
+            current_word: game.get_current_word(),
         };
         let _ = game.tx.send(format!("New Player\t{}", username));
         return Ok(Json(response))
@@ -235,7 +243,6 @@ fn leave_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: 
 
         game.current_player_index = idx;
         let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
-
     }
     else { // if quitter is not current player, find the index of current player after having removed qutter
         let idx = match game.players.iter().position(|p| p.name == current_player_name) {

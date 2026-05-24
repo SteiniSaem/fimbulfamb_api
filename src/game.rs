@@ -13,6 +13,13 @@ pub struct Player {
     pub points: i16,
 }
 
+#[derive(Serialize)]
+#[derive(Clone)]
+pub struct Definition {
+    pub player: String,
+    pub definition: String
+}
+
 pub struct Game {
     pub owner: String,
     pub players: Vec<Player>,
@@ -22,7 +29,8 @@ pub struct Game {
     pub has_started: bool,
     pub open_for_submissions: bool,
     pub tx: broadcast::Sender<String>,
-    pub time_of_last_activity: u64
+    pub time_of_last_activity: u64,
+    pub player_definitions: Vec<Definition>
 }
 
 impl Game {
@@ -46,6 +54,7 @@ impl Game {
             has_started: false,
             tx: tx,
             time_of_last_activity: now,
+            player_definitions: vec![]
         }
     }
 
@@ -57,6 +66,18 @@ impl Game {
         else{
             return Err(String::from("Nafn frátekið"))
         }
+    }
+
+    pub fn add_definition(&mut self, name: &str, definition: &str) {
+        let new_def = Definition{player: name.to_string(), definition: definition.to_string()};
+        match self.player_definitions.iter().position(|pd| pd.player == name) {
+            Some(i) => {
+                self.player_definitions[i] = new_def;
+            },
+            None => {
+                self.player_definitions.push(new_def);
+            }
+        };
     }
 
     pub fn remove_player(&mut self, name: &str) {
@@ -79,6 +100,8 @@ impl Game {
         else {
             self.current_word_index += 1
         }
+        self.open_for_submissions = true;
+        
         Ok(())
     }
 
