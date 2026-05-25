@@ -147,17 +147,6 @@ async fn update_scores(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &st
 }
 
 
-#[get("/hasGameStarted/<id>")]
-fn has_game_started(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
-    let games = games.lock().unwrap();
-    let game = match games.get(id) {
-        Some(g) => g,
-        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
-    };
-
-    Ok(Json(game.has_started))
-}
-
 #[derive(Deserialize)]
 struct JoinGameRequest {
     username: String
@@ -170,7 +159,9 @@ struct JoinGameResponse {
     players: Vec<Player>,
     current_player: String,
     player_definitions: Vec<Definition>,
-    current_word: Word
+    current_word: Word,
+    joinable: bool,
+    has_started: bool,
 }
 
 #[put("/joinGame/<id>", data="<body>")]
@@ -183,7 +174,7 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
 
     let username = &body.username;
 
-    if !game.has_started {
+    if game.joinable {
         match game.add_player(&username) {
             Ok(_) => (),
             Err(err) => return Err((Status::NotAcceptable, format!("{}", err)))
@@ -195,13 +186,28 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
             current_player: game.get_current_player(),
             player_definitions: game.player_definitions.clone(),
             current_word: game.get_current_word(),
+            joinable: game.joinable,
+            has_started: game.has_started,
         };
         let _ = game.tx.send(format!("New Player\t{}", username));
         return Ok(Json(response))
     }
     else {
-        return Err((Status::Forbidden, format!("Game not joinable")))
+        return Err((Status::Forbidden, format!("Leikur lokaður")))
     }
+}
+
+
+#[put("/setGameJoinability/<id>/<is_joinable>")]
+fn set_game_joinability(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, is_joinable: bool) -> Result<(), (Status, String)> {
+    let mut games = games.lock().unwrap();
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+
+    game.joinable = is_joinable;
+    Ok(())
 }
 
 #[derive(Deserialize)]
@@ -378,9 +384,9 @@ async fn main() {
             end_game,
             start_game,
             join_game,
+            set_game_joinability,
             leave_game,
             get_players,
-            has_game_started,
             get_current_word,
             next_round,
             next_word,

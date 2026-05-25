@@ -26,6 +26,7 @@ pub struct Game {
     pub current_player_index: usize, // index to the player whose turn it currently is
     pub word_pool: Vec<Word>,
     pub current_word_index: usize, // index to the current word in the word pool
+    pub joinable: bool,
     pub has_started: bool,
     pub open_for_submissions: bool,
     pub tx: broadcast::Sender<String>,
@@ -51,10 +52,11 @@ impl Game {
             word_pool: word_pool,
             current_word_index: 0,
             open_for_submissions: true,
+            joinable: true,
             has_started: false,
             tx: tx,
             time_of_last_activity: now,
-            player_definitions: vec![]
+            player_definitions: vec![],
         }
     }
 
@@ -80,9 +82,19 @@ impl Game {
         };
     }
 
+
     pub fn remove_player(&mut self, name: &str) {
         match self.players.iter().position(|p| p.name == name) {
-            Some(i) => self.players.remove(i),
+            Some(i) => {
+                self.players.remove(i);
+                // remove definition from that player as well
+                match self.player_definitions.iter().position(|pd| pd.player == name) {
+                    Some(i) => {
+                        self.player_definitions.remove(i);
+                    },
+                    None => return
+                };
+            },
             None => return
         };
     }
@@ -101,7 +113,7 @@ impl Game {
             self.current_word_index += 1
         }
         self.open_for_submissions = true;
-        
+
         Ok(())
     }
 
@@ -145,6 +157,7 @@ impl Game {
     }
 
     pub fn start_game(&mut self) {
+        self.joinable = false;
         self.has_started = true;
     }
 
