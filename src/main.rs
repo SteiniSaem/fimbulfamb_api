@@ -162,6 +162,7 @@ struct JoinGameResponse {
     current_word: Word,
     joinable: bool,
     has_started: bool,
+    open_for_submissions: bool,
 }
 
 #[put("/joinGame/<id>", data="<body>")]
@@ -188,6 +189,7 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
             current_word: game.get_current_word(),
             joinable: game.joinable,
             has_started: game.has_started,
+            open_for_submissions: game.open_for_submissions,
         };
         let _ = game.tx.send(format!("New Player\t{}", username));
         return Ok(Json(response))
