@@ -23,12 +23,13 @@ impl Fairing for PingFairing {
         if let rocket::outcome::Outcome::Success(games) = games {
             // extract game id from the url path if present
             if let Some(id) = request.param::<&str>(1).and_then(|r| r.ok()) {
-                let mut games = games.lock().unwrap();
-                if let Some(game) = games.get_mut(id) {
-                    game.time_of_last_activity = SystemTime::now()
-                        .duration_since(UNIX_EPOCH)
-                        .unwrap()
-                        .as_secs();
+                if let Ok(mut games) = games.lock() {
+                    if let Some(game) = games.get_mut(id) {
+                        game.time_of_last_activity = SystemTime::now()
+                            .duration_since(UNIX_EPOCH)
+                            .unwrap()
+                            .as_secs();
+                    }
                 }
             }
         }
