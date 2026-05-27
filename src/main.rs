@@ -81,7 +81,11 @@ fn next_round(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str,) -> Re
 
     match game.next_round() {
         Ok(_) => {
-            let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+            if game.word_is_visible {
+                let _ = game.tx.send(format!("Next Round\t{}\t{}", game.get_current_player(), game.get_current_word().word));
+            } else {
+                let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+            }
         },
         Err(err) => {
             let _ = game.tx.send(format!("Error\t{}", err));
@@ -183,6 +187,12 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
 
     let username = &body.username;
 
+    let current_word = if game.word_is_visible {
+        Word {word: game.get_current_word().word, definition: String::new()}
+    } else {
+        Word {word: String::new(), definition: String::new()}
+    };
+
     if game.joinable {
         match game.add_player(&username) {
             Ok(_) => (),
@@ -194,7 +204,7 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
             players: game.players.clone(),
             current_player: game.get_current_player(),
             player_definitions: game.player_definitions.clone(),
-            current_word: game.get_current_word(),
+            current_word: current_word,
             joinable: game.joinable,
             has_started: game.has_started,
             open_for_submissions: game.open_for_submissions,
@@ -217,6 +227,24 @@ fn set_game_joinability(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &s
     };
 
     game.joinable = is_joinable;
+    Ok(())
+}
+
+#[put("/setWordVisibility/<id>/<word_is_visible>")]
+fn set_word_visibility(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, word_is_visible: bool) -> Result<(), (Status, String)> {
+    let mut games = get_games(&games)?;
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+
+    game.word_is_visible = word_is_visible;
+    if game.word_is_visible {
+        let _ = game.tx.send(format!("Show word\t{}", game.get_current_word().word));
+    }
+    else {
+        let _ = game.tx.send(format!("Hide word"));
+    }
     Ok(())
 }
 
@@ -258,7 +286,11 @@ fn leave_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: 
         };
 
         game.current_player_index = idx;
-        let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+        if game.word_is_visible {
+            let _ = game.tx.send(format!("Next Round\t{}\t{}", game.get_current_player(), game.get_current_word().word));
+        } else {
+            let _ = game.tx.send(format!("Next Round\t{}", game.get_current_player()));
+        }
     }
     else { // if quitter is not current player, find the index of current player after having removed qutter
         let idx = match game.players.iter().position(|p| p.name == current_player_name) {
@@ -401,6 +433,7 @@ async fn main() {
             start_game,
             join_game,
             set_game_joinability,
+            set_word_visibility,
             leave_game,
             get_players,
             get_current_word,

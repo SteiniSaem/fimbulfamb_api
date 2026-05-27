@@ -27,11 +27,13 @@ pub struct Game {
     pub word_pool: Vec<Word>,
     pub current_word_index: usize, // index to the current word in the word pool
     pub joinable: bool,
+    pub word_is_visible: bool, //is word visible to all players or just current_player
     pub has_started: bool,
     pub open_for_submissions: bool,
+    pub player_definitions: Vec<Definition>,
     pub tx: broadcast::Sender<String>,
     pub time_of_last_activity: u64,
-    pub player_definitions: Vec<Definition>
+
 }
 
 impl Game {
@@ -53,6 +55,7 @@ impl Game {
             current_word_index: 0,
             open_for_submissions: true,
             joinable: true,
+            word_is_visible: false,
             has_started: false,
             tx: tx,
             time_of_last_activity: now,
