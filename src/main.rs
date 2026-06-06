@@ -11,7 +11,7 @@ use rocket_cors::{CorsOptions, AllowedOrigins};
 use utils::{Word, generate_code, read_words_and_definitions_from_file};
 use rocket::State;
 use rocket::serde::json::Json;
-use crate::game::{Definition, Game};
+use crate::game::{Definition, Game, ScoreByRound};
 use std::sync::{Arc, Mutex};
 use serde::{Serialize, Deserialize};
 use rocket::http::Status;
@@ -329,6 +329,17 @@ fn get_current_word(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) 
     Ok(Some(Json(game.get_current_word())))
 }
 
+#[get("/scoreHistory/<id>")]
+fn get_score_history(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Option<Json<Vec<ScoreByRound>>>, (Status, String)> {
+    let games = get_games(&games)?;
+    let game = match games.get(id) {
+        Some(g) => g,
+        None => return Ok(None)
+    };
+
+    Ok(Some(Json(game.score_history.clone())))
+}
+
 #[put("/openForSubmissions/<id>")]
 fn open_for_submissions(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Json<bool>, (Status, String)> {
     let mut games = get_games(&games)?;
@@ -437,6 +448,7 @@ async fn main() {
             leave_game,
             get_players,
             get_current_word,
+            get_score_history,
             next_round,
             next_word,
             open_for_submissions,

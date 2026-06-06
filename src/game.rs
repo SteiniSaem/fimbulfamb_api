@@ -20,6 +20,13 @@ pub struct Definition {
     pub definition: String
 }
 
+#[derive(Serialize)]
+#[derive(Clone)]
+pub struct ScoreByRound {
+    round: usize,
+    score: Vec<Player>
+}
+
 pub struct Game {
     pub owner: String,
     pub players: Vec<Player>,
@@ -31,9 +38,9 @@ pub struct Game {
     pub has_started: bool,
     pub open_for_submissions: bool,
     pub player_definitions: Vec<Definition>,
+    pub score_history: Vec<ScoreByRound>,
     pub tx: broadcast::Sender<String>,
     pub time_of_last_activity: u64,
-
 }
 
 impl Game {
@@ -57,6 +64,7 @@ impl Game {
             joinable: true,
             word_is_visible: false,
             has_started: false,
+            score_history: vec![],
             tx: tx,
             time_of_last_activity: now,
             player_definitions: vec![],
@@ -116,6 +124,15 @@ impl Game {
             self.current_word_index += 1
         }
         self.open_for_submissions = true;
+
+        match self.score_history.last() {
+            Some(r) => {
+                self.score_history.push(ScoreByRound { round: r.round+1, score: self.players.clone() })
+            },
+            None => {
+                self.score_history.push(ScoreByRound { round: 1, score: self.players.clone() })
+            }
+        };
 
         Ok(())
     }
