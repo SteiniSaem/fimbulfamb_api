@@ -66,7 +66,7 @@ fn next_word(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Resu
     match game.next_word() {
         Ok(w) => {
             if game.word_is_visible {
-                let _ = game.tx.send(format!("Show word\t{}", game.get_current_word().word));
+                let _ = game.tx.send(format!("Show word\t{}", w.word));
             }
             return Ok(Json(w))
         },
