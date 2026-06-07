@@ -134,7 +134,6 @@ Húflægur	Notað um fjöl, sem hægt er að nota í skipsbók
 Tirjulegur	Rytjulegur, vesældarlegur
 Brjóstadúkur	Karlmannsflík sem er n.k. vesti eða ermalaus treyja
 Hnóhnika	Að vera á sífelldu iði. Dæmi: „Barnið hnóhnik- aði sér allan daginn.“
-
 Ónotahylki	Geðillur maður sem er erfiður í umgengni
 Peggaður	Lýsingarorð yfir mjög ölvaðan mann
 Ótó	Skepna sem þrífst illa
@@ -195,7 +194,6 @@ Apafótur	Planta af burknaætt
 Skuddi	Brennivínssopi
 Snarla	Vír af spilkoppi í trissu á stýrishúsi
 Ægisif	Afbökun á nafni Hagia Sophia, aðalkirkju Miklagarðs
-
 Erkni	Eitthvað stórt og þungt
 Milskinn	Að vera milskinn er að vera mildur eða mjúkur
 Svefnskirr	Sá sem vaknar við minnstu ókyrrð er sagður vera svefnskirr
@@ -223,7 +221,6 @@ Fruska	Kærulaus kona
 Dimbiltá	Stúlka sem er létt á fæti
 Blágagl	Fornt skáldlegt heiti á hrafni
 Sperðl	Gróft band
-
 Doggast	Að gera eitthvað umhugsunarlaust, eins og af vana
 Síill	Trégrind með síuklút sem lögð var yfir strokk til að sía rjómann sem átti að strokka
 Tufussulegur	Skapvondur
@@ -333,7 +330,6 @@ Skitinhæla	Kvenkynsútgáfa af orðinu skíthæll
 Stirsla	Fornt orð yfir afturenda
 Súkra	Gjaldmiðill Ekvadors
 Hindla	Ungur kvenhjörtur (hind)
-
 Næræta	Sá sem reynir að borða eingöngu mat sem framleiddur er í næsta nágrenni við hann
 Kavia	Skósíð kápa með stórum kraga sem var algeng ferðaföt karlmanna á 19. öld
 Láta síga á hömlu	Að róa hægt aftur á bak
@@ -415,7 +411,6 @@ Ingólfsdrekka	Sælindýr af drekkuætt
 Garnavindill	Súrsaður matur þar sem þarmar eru vafðir utan um ristilbúta
 Guddilon	Hálfgerður ræfill
 Ótili	Mikill fjöldi af einhverju, svo að segja 
-
 Að skíta á lásinn við einhvern	Að skipta sér af tali annarra
 Brísi	Eldur
 Drýsildrjóli	Hnykill eða eitthvað lítið
@@ -443,7 +438,6 @@ Bos	Hreiður eða bæli
 Að hefta hunda	Að híka í lestri
 Takfæð	Sama og fátækt, sett saman á annan hátt
 Snípuludda	Tegund af flugu sem lifir á því að sjúga blóð úr spendýrum og fuglum
-
 Kastarholubúskapur	Léleg eða frumstæð matreiðsla
 Drigli	Eitthvað rennandi blautt
 Mungát	Heimabruggaður bjór
@@ -499,11 +493,39 @@ Starfsismátt	Vinnuföt
 Bekja	Nýyrði um bekken, skál fyrir þvag og hægðir sjúklings á sjúkrahúsi
 Álheimur	Í fornu skáldamáli er álheimur notað um hafið, þ.e.a.s. sá staður þar sem álar búa.
 
-
-
-
-
-
-
-
-
+Puðrureddi	Maður sem spilar sig sem stóran en er lítils verður í raun
+Steinfella	Gamalt nýyrði yfir mósakmynd
+Stóráni	Ánamaðkur sem getur orðið allt að 30 cm á lengd
+Kovertur	Áklæði á hest
+Nula	Að nula er að slóra eða slugsa
+Skrunkur	Gamall karl
+Ómpeyting	Sérstök tækni við að fjarlægia innihald augasteins úr sjúklingi
+Heilivogur	Smyrsl með græðandi mátt
+Hreingálkn	Ófreskja sem nefnd er í Sæmundar-Eddu
+Unjan	Laukur, sbr. „onion"
+Eiskra	Að vera trylltour og öskra af reiði
+Skæfa	Höfskekkja
+Goðalykill	Garðplöntutegund
+Torfunári	Útjaðar fisktorfu
+Andsyptir	Að eiga erfitt með andardrátt
+Þinkuleysi	Hugsunarleysi
+Bleikihagl	Él með hálfgagnsæjum haglkornum
+Nosi	Reður hests
+Alamandur	Mandla, sbr. enska orðið „almond"
+Hundvís	Mjög vitur
+Grjúpán	Bjúga
+Linhnakka	Súluungi sem er að verða átuhæfur
+Punghelda	Pungbindi
+Haftaska	Sæbjúga af ákveðinni tegund
+Dálpa	Sveifla hægt upp og niður, sbr. fuglinn dálpar vængjunum
+Að kasta út morsiðrinu	Að láta af hendi síðasta trompið
+Ölnarhrjóna	Útvöxtur á framhandleggsbeini
+Balbumba	Hryssa með stóra bumbu
+Tælitafn	Tálbeita
+Skúlka	Að fylgjast ekki með í kennslustundum
+Barlegur	Hress og kátur
+Stjamp	Erfið viðureign
+Tatteygður	Með hvasst augnaráð
+Flughani	Fljótfær maður sem er veikur fyrir freistingum
+Densilegur	Snyrtilegur
+Simbalom	Strengjahljóðfæri sem leikið er á með tréhömrum. Upprunnið í Ungverjalandi.
