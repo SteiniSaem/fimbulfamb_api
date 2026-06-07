@@ -1,44 +1,509 @@
-slurkaður	alldrukkinn
-nurtuætt	ætt sælindýra
-burstabær	íslenskur sveitabær með uppmjóum húsgafli, burst
-kútli	lítill, þófinn vettlingur
-skolpa	fljótfær, fluðruleg manneskja	skola, þvo óvandlega	flóa, fljóta yfir
-matróna	hefðarfrú
-silalegur	hægur og þungur í hreyfingum
-kúristi	sá eða sú sem stundar nám af mikilli elju	sá sem liggur sífellt yfir námsbókum
-Hesjuvellir	einsk. þurrkgrind eða trönur, lóðréttir staurar með láréttum rám á milli,…
-skúlkur	bitlaus hnífur, reddi, busi
-skóð	hættulegt tæki, vopn
-mortari	ílát til að mylja í hörð efni, mortél
-slurkur	vænn sopi, teygur	(vænn) sopi	talsvert af e-u
-þrúgi	snjóskór, leppaskór	ísing
-fálma	grípa eða þreifa ómarkvisst með höndunum	þreifa, þukla ómarkvíst	pata höndum	hika
-valska	rotta	rotta	frönsk tunga
-næfur	trjábörkur (einkum af birki)	vaskur, ötull	harður, skarpur
-örl	öldugutl, smá öldugjálfur við stein eða strönd
-lögra	flaðra	dingla rófunni
-jafnhatta	lyfta (lóði) frá brjósthæð með beinum handleggjum upp fyrir höfuð
-molla	mikill lofthiti með raka, hitamolla	hæglát kona	hlýtt, stillt dumbungsveður, svækjuhiti	kafaldsmugga: <i>molluhríð</i>	lasleiki, drungi, deyfð
-marsúrki	sérstakur dans
-pultra	kvisa um, hvísla
-pípóla  dekra við einhvern
-glænepjulegur	sem er illa klæddur og lítur út fyrir að vera kalt
-snubba	ávíta, finna að	móðga	taka bit úr eggjárni
-kljásteinn	steinn á netteini eða vef
-ókværilátur	óprúttinn, ókvartsamur
-svolgur	það að teyga, svelgja í sig	árvöxtur, öldusog
-hráslagalegur	kaldur og rakur
-örlaki	vesall maður og kraftalítill, hrumt og vanmegna gamalmenni	flón, vanmetaskepna	ljóður, annmarki
-árefti	tréborð eða grjóthellur sem liggja ofan á meginbitum (burðarröftum) í torfþaki, refti
-sneypa	skamma (e-n), atyrða (e-n)	skömm, vanvirða	skera haus af silungi (og slægja hann)	ávíta, óvirða e-n,…
-pausi	posi, pokaskjatti
-beinmarki	óþokki
-rjósta	bauna á e-n, tala með rosta, reka á eftir
-þrílemba	ær sem hefur eignast þrjú lömb í einum burði
-laskaermi	ermi með axlargeira sem nær að hálsmáli
-dúði	þykkur, margfaldur og hlýr klæðnaður	tuskulufsur
-Dammur	manngerð tjörn
-skjönt	hreifur af víni
-bokki	trönur, stöpull eða stoð undir e-u	fallhamar,…	lítið ílát	fyrirferðarmikill og valdamikill maður	geithafur, bukkur	einsk. trönur eða undirstaða undir plönkum eða borðum
-gullastokkur	kassi undir leikföng
-þrætubókarlist	samræða þar sem andstæð sjónarmið takast á
+Etjuhundur	Sporhundur
+Rússagilli	Samkoma stúdenta til að fagna nýnemum að hausti
+Lunti	Kveikiþráður á byssu. Orðið er einnig notað yfir getnaðarlim karla.
+Traðjarka	Ganga fram og aftur, spandspora
+Byrsla	Skilrúm milli bása í fjósi
+Að vera í smjörkaupum	Að ganga með pilsfaldinn uppbrettan óviljandi
+Kúdda	Að kála einhverjum. Dæmi: „Bóndi kúddaði illmenninu.“
+Attnefóttur	Kind sem er dökk á lit með hvítan haus og háls en dökka bauga kringum augun
+Dúfi	Dúfi er skvamp eða gutl í vatni
+Drulsa	Hali
+Sýst	Lýsingarháttur þátíðar af sýsla, að starfa eða hafast að
+Horlopi	Hold sem er slappt af hungri. Einnig notað yfir gisið hár.
+Málajárn	Skreytt vopn úr járni
+Katekólamín	Efni sem líkaminn framleiðir, skylt adrenalíni
+Paxblað	Spjald með krossmarki sem kysst er við guðsþjónustur
+Kjafal	Ermalaus flík með hettu sem er hneppt saman milli fótanna og opin á hliðum
+Skreppíni	Sjónhverfing eða missýning
+Æðvængjur	Ættbálkur skordýra himnu í glugga sem skiptist í tvo undirættbálka, sagvespur og broddvespur
+Ásvellur	Ásvellur maður er yfirgangssamur eða frekur
+Súðarbirna	Frammúnt og ófríð stúlka
+Brókaði	Þykkt munstrað silkiefni sem er notað í fínan klæðnað og er oft skært á litinn
+Pampúsa	Lélegur skór
+Élker	Himinn
+Krjábull	Torlesin ljót skrift
+Bengill	Maður með skakka fætur
+Dyfta	Að púðra sig
+Hralíka	Skinnlaus
+Kjarrygla	Eitt af stærstu fiðrildum sem finnast á Íslandi. Það er þó afar sjaldgæft.
+Dómgrindur	Grindverk utan um vitnastúku í dómsal
+Traðjóla	Að traðka á einhverju og óhreinka það
+Skjábulungur	Grind um gegnsæja himnu í glugga sem notuð var í stað rúðu
+Ketterí	Villutrú, sbr. kettari (trúvillingur)
+Finnvika	Að stunda galdra á sama hátt og finnskir menn
+Gnæfrar	Bjálkaendar sem standa út á hornum í bjálkahúsi
+Skeppa	Mælieining. Oft notuð til að mæla korn og vísar þá til 1/8 úr tunnu.
+Statút	Tilgangslaus regla
+Bausnalegur	Klunnalegur
+Búsbútutur	Er notað um þann hlut sem verður að vera til á hverjum bæ þar sem stundaður er búskapur
+Einjárn	Að vera einjárn þýðir að vera stöðugur eða samfelldur
+Skynskiptingur	Flóni, vitleysingur
+Fýbjakk	Orðið fýbjakk er notað til að lýsa skömm eða andstyggð á einhverju
+Nafa	Smábútur
+Loggorta	Seglskip notað til strandsiglinga. Komið úr hollensku: Logger.
+Sufla	Mjaltakona
+Spansk	Leikur þar sem höndum er slegið saman, oft leikinn til að halda á sér hita
+Brótólía	Mistök eða ruglingur
+Stöðvarkóngur	Fágæt sæsnigilstegund
+Konupungur	Sæsveppur
+Nefi	Frændi, samanber enska orðið „nephew“
+Lympía	Heigull
+Erðgróinn	Vaxinn í jörðu, sagt um dverga. Dæmi: „Jón var svo smár að hann var erðgróinn.“
+Tynglukvísl	Æð sem liggur til vinstra lunga
+Bosvindi	Skafrenningur
+Skriðköttur	Sá sem alltaf nær prófum með lágmarkseinkunn
+Rotinpúra	Rytjuleg, gömul kind
+Lágnaðarbragð	Örlítill yldukeimur
+Netbykkni	Þykkir en götóttir skýjaflókar
+Sópdyngja	Fornt orð yfir ruslahaug
+Sóri	Húðsjúkdómur sem kemur fram í bleikum hreistrugum flekkjum á húðinni
+Örglast	Að rísa upp með erfiðismunum
+
+Sjafni	Brúðgumi
+Hlutaskítur	Sá sem skiptir sér af því sem honum kemur ekki við
+Sönhattur	Bragarháttur sem einkennir sonettur
+Magagreppur	Þurrkaður selsmagi sem notaður var sem ílát undir lýsi
+Legða	Hrisla sem liggur með jörðinni
+Kefsir	þræll
+Mannauli	Mannauli
+Motur	Kvenmannshattur, gerður úr hvítu efni
+Bolværing	Sjúkdómur sem veldur litabreytingum í húð
+Skrumpeis	Þeytt undanrenna sem þenst út við það að hellt er út í hana heitri mjólk
+Dásinn	Latur
+Skólkinni	Úlfur
+Fýluböllur	Sveppategund
+Pippingur	Úfinn sjór og öldumikill
+Frugga	Mygla
+Kirki	Gjá með rennandi vatni
+Broðháfur	Grófur sokkur
+Refhvörf	Þegar orðum með gagnstæða merkingu er raðað saman (t.d. í skáldskap)
+Groppagrind	Þræðir í risvefjum getnaðarlims
+Hnútrós	Sjúkdómur sem leggst sérstaklega á ungar konur. Einkennist m.a. af gigtarverkjum.
+Krummaolía	Brennivín
+Símilja	Grófmalað, glútenríkt hveiti sem er notað í ýmsa mjólkurgrauta
+Halloppa	Draga handfæri hægt úr sjó
+Embra	Kvörtunargjörn kona
+Jólaskrá	Veðurspádómur um næstu tólf daga frá aðfangadegi
+Pómaði	Smyrsl eða krem sem auka eiga fegurð húðarinnar
+Bugg	Gagghljóð í tófu
+Að setja nefið upp í loftið	Að setja nefið upp í loftið
+Pikisdagar	Fornt heiti yfir hvítasunnu
+Elgfróði	Vera sem er maður að ofan en elgur að neðan
+Vöndulbifur	Snikjudýr sem leggst á fiska
+Afríðill	Tæki til að breyta riðstraumi í jafnstraum
+Lærahungur	Rýmun vöðva í fótum
+Drems	Tregða. Að vera drems er að vera tregur til einhvers.
+Skeggbolli	Bolli sem er lokaður að hluta til að koma í veg fyrir að yfirvaraskegg blotni þegar drukkið er
+Finkull	Annað orð yfir plöntuna fenniku
+Druði	Ólögunlegur trjádrumbur
+Blöðruskeri	Tegund orma sem lifir á sjávarbotni
+Dar	Skyggni á húfu, sbr. derhúfa eða darhúfa
+Múrena	Ættkvísl stórra hreisturlausra ránfiska
+Spörðungur	Silungur bundinn við sporð annars silungs
+Koðri	Pungur með eistum
+Fálkaströnd	Fálkaströnd merkir hönd í fornum kveðskap
+Brandygla	Fiðrildi af yglustett, algengt á Suðausturlandi
+Tygilegur	Notað um þann sem er drembinn eða bitur
+Ormfránn	Lýsingarorð sem merkir glitrandi
+Brunaeimingur	Ískaldur vindur
+Lagsm	Félagi, samanber lagsmaður
+Krinólína	Vítt pils sem banið er út með grind eða gjörð
+Yps	Neðsti hluti baks. Samheiti „ufs“.
+Slófremi	Seint og um síðir. Dæmi: „Slófremi fékk ég bakkað frænda mínum aðstoðina.“
+Dylminn	Kærulaus
+Skurðsl	Kjöt sem er skorið niður mjög smátt
+Tryppilsinnaður	Uppstökkur
+Svidda	Sjálfdauður
+Kerlingarklof	Tegund hnúts sem ekki raknar upp
+Andarsytra	Göng frá augnkrók niður í nef
+Hriflingar	Tegund skófatnaðar
+Ristilkarlar	Fellingar á ristlinum
+Knésetningur	Fóstursonur
+Baldurskinn	Silkiefni frá Bagdad
+Greiparsvunta	Það að klemma nef annars milli löngutangar og vísifingurs
+Ers	Taminn hestur
+Íðusdagur	Íðusdagur er 15. dagur í mars, maí, júlí og október, en 13. dagur annarra mánaða
+Haldreki	Sporðdreki
+Skúlkur	Orð yfir bitlausan hníf
+Jálmur	Brak og brestir
+Skáldast	Verða hárlaus eða hárlaus á blettum
+Spáflugan kafnar í rassinum á einhverjum	Sagt þegar einhverjum mistekst verk. Dæmi: „Þar kafnað spáflugan í rassinum á Pálma.“
+Súpplikátsía	Auðmjúk beiðni
+Vatalegur	Kvensamur
+Húflægur	Notað um fjöl, sem hægt er að nota í skipsbók
+Tirjulegur	Rytjulegur, vesældarlegur
+Brjóstadúkur	Karlmannsflík sem er n.k. vesti eða ermalaus treyja
+Hnóhnika	Að vera á sífelldu iði. Dæmi: „Barnið hnóhnik- aði sér allan daginn.“
+
+Ónotahylki	Geðillur maður sem er erfiður í umgengni
+Peggaður	Lýsingarorð yfir mjög ölvaðan mann
+Ótó	Skepna sem þrífst illa
+Stillibekri	Gestabraut
+Hordálkur	Grindhoraður maður
+Pikkfalur	Strengur til að reisa aftari enda gaffals á segli
+Tefill	Sá sem tefur eitthvað
+Vígseðill	Vixill
+Vottak	Raki
+Gullvarta	Stærsta borgarhlið Miklagarðs (nú Istanbúl)
+Að sleikja rassinn á honum Loka	Að sleikja enda þráðar til þess að hann komist betur í gegnum nálarauga
+Dristugur	Hugrakkur. Dæmi: „Ragnar loðbrók var maður dristugur mjög.“
+Rauðvínshattur	Tegund af ætisvepp
+Freykjulegur	Laus í sér
+Rill	Dökkur eða grár blettur á hvítri kind
+Dimbiltá	Stúlka sem er létt á fæti
+Blágagl	Fornt skáldlegt heiti á hrafni
+Sperðil	Gróft band
+Blíma	Dálítil bólga eða bóla
+Raddmella	Söngvari í kór sem helst illa í sinni rödd
+Skáldagemla	Tönn sem barn fæðist með
+Ódres	Sóði
+Bifalning	Fyrirskipun
+Krátan	Fjandinn, helst notað í eignarfalli í blótsyrðum, sbr. ansans. Dæmi: „Krátans óheppni!“
+Smágramur	Ilsaðla sem líktist grameðlu en var mun minni
+Kýlabrækur	Karlmannsbuxur frá 17. og 18. öld með sérstökum poka fyrir kynfærin
+Drepill	Tæki til að slá bolta með. Samheiti orðsins „knatttré“.
+Kilarvikan	Kilarvikan er kappsigling sem haldin er í Kíl í Holtsetalandi síðustu heilu vikuna í júní ár hvert
+Skammrifsbrók	Feitt kjötstykki
+Átugla	Sama og átvagl, notað um þann sem er gráðugur
+Fjölmúlavil	Lítill og ómerkilegur hlutur
+Óskyti	Léleg og dhittin skytta
+Prinna	Að snúa þrjá þræði saman
+Krókasteik	Leg úr kind
+Hundrað vikna	Lengdarmálseining á sjó. Dæmi: „Jón sja hundrað vikna út á hafið þennan dag.“
+Mjallarkóngur	Tegund nokkuð stórra kuðunga
+Aftanriða	Norn sem fer gandreið að kvöldi
+Frunsa sig	Að skreyta sig
+Vergi	Vernd eða skjól
+Trónn	Hásæti, sbr. enska orðið „throne“
+Horbóng	Grindhoraður maður
+Taferni	Krá, gistihús, sbr. enska orðið „tavern“
+Egasléttur	Alveg rennisléttur
+Dorri	Hrútur
+Hispursmey	Tilgerðarleg stelpa klædd í nýjustu tísku
+Balgeira	Að strita við eitthvað
+Holubrjóst	Inndregin geirvarta
+Krústa	Ör efter bólu
+Fornbæra	Kýr sem ber fyrir hálfu ári
+Brautlaga	Það að flytja skip baðan sem það hefur legið um tíma
+Glerkunta	Skegghjungur á unglingum
+Mjanmarska	Burmneska, tungumál sem talað er í Burma
+Birkibeinar	Uppreisnarmenn í liði Sverris konungs í Noregi á síðari hluta 12. aldar
+Vorgugur	Óhreinn, t.d. að vera með vorgugar hendur
+Kattmella	Sérstök lykkja notuð í útsaumi, einnig nefnd kappmella
+Að ganga úr augnakörlunum	Að fara úr mjaðmarlið
+Apafótur	Planta af burknaætt
+Skuddi	Brennivínssopi
+Snarla	Vír af spilkoppi í trissu á stýrishúsi
+Ægisif	Afbökun á nafni Hagia Sophia, aðalkirkju Miklagarðs
+
+Erkni	Eitthvað stórt og þungt
+Milskinn	Að vera milskinn er að vera mildur eða mjúkur
+Svefnskirr	Sá sem vaknar við minnstu ókyrrð er sagður vera svefnskirr
+Flebba	Annað orð yfir daðurdrós eða glyðru
+Ræsiskák	Svæði þar sem keppendur í skíðagöngu eru ræstir
+Mítra	Íslenskt kvenmannsnafn. Árið 2010 báru það tvær konur á Íslandi.
+Að vinna einhverjum stalldræpt hjarta	Að skjóta einhverjum skelk í bringu
+Heytos	Hey sem geymt er utandyra
+Fatahestur	Hestur sem ber farangur
+Máki	Klunnaleg hönd
+Ylbrá	Tíbrá, hillingar
+Kratins	Vægt blótsyrði í líkingu við „skrattans" eða „árans"
+Gaga	Að henda gaman að. Dæmi: „Systurnar göguðu bróður sinn oft."
+Gjússa	Hlussa, feit kona
+Síkoría	Matjurt með þykka beiska sprota sem borðaðir eru sem grænmeti
+Benlogi	Skáldamál fyrir sverð
+Heljarblý	Frumefnið plúton. Orðið myndað af „Hel", jafngildi rómverska guðsins Plútons, og „blý".
+Þjokkubeinn	Viðurnefni sem merkir „hinn fótdigri"
+Spruð	Stöng sem stendur fram úr stafni skips
+Spík	Mjó spýta
+Kirkjusár	Skírnarfontur
+Ustur	Belti
+Gotpískur	Lítill hákarl
+Fruska	Kærulaus kona
+Dimbiltá	Stúlka sem er létt á fæti
+Blágagl	Fornt skáldlegt heiti á hrafni
+Sperðl	Gróft band
+
+Doggast	Að gera eitthvað umhugsunarlaust, eins og af vana
+Síill	Trégrind með síuklút sem lögð var yfir strokk til að sía rjómann sem átti að strokka
+Tufussulegur	Skapvondur
+Bildör	Ör með sérstakt blað
+Húnamengi	Ómerkilegur náungi
+Tríkíni	Sníkjudýr sem er algengt í svínum
+Sprakka	Allstór lúða
+Berlingur	Dvergsheiti í norrænni goðafræði
+Imleitur	Dökkur ásýndum
+Fákalitill	Hæglátur og þrúður
+Rafel	Húfa gerð úr feldi marðardýrs
+Tínamúi	Fuglategund, einnig kölluð hænsnabróðir
+Mersli	Marblettur
+Riðanæli	Fiskseiði
+Glermey	Undirættbálkur skordýra af ættbálki vogvængna
+Steylur	Langir og klunnalegir fætur
+Kakbretta	Mjúkur ostur
+Kantilía	Silfrað eða gyllt band úr virbrœði sem notað er við útsaum
+Mýeldur	Mikið af einhverju
+Gerling	Smit eða sýking
+Fílipus	Er gæluheiti á núllvalda fylki í stærðfræði: 2x2 fylki með núll í öllum reitum nema einum.
+Futtungur	Snúður
+Kambpungur	Taska fyrir bréf eða skjöl
+Rádýr	Dýrategund af ætt hjartardýra
+Köngulskot	Lítið skarð við heilaköngulinn
+Skjákrummi	Forvitinn maður
+Fársætandi	Óvinur
+
+Tísaldi	Smávaxinn maður
+Smiðmess	Eggjárn með tveimur handföngum
+Karthaus	Kaktus
+Krefeti	Aumingi
+Pöpulrás	Sifelldur straumur gesta sem koma og fara
+Örsauði	Kindalaus maður. Sá sem á engan sauð er sagður örsauði.
+Dornik	Raul eða söngl
+Að vinda loftkött	Að lyfta einhverju eða einhverjum upp yfir höfuð sér
+Flygg	Tröllkona, notað í rímnakveðskap
+Skyndiklauf	Lauslát stúlka
+Faribjór	Skinn af sjálfdauðri skepnu
+Safnkál	Súr skyrhræringur með káli
+Lopasegl	Letingi
+Kafhriða	Útblásinn hákarlsmagi
+Dörslag	Sigti
+Drekakollur	Ættkvísl innan varablómaættar
+Ófeigseyru	Holdsepar við hjartarætur sláturdýra
+Fylkja hamalt	Að raða herliði upp bannig að skjöldur nemi við skjöld
+Stílhyrna	Nabbi sem skagar út úr beini
+Hveita	Myrkfælni
+Trinta	Klettadrangur eða -strýta
+Þallarbróðir	Hávaxið, sígrænt tré af ballarætt
+Urraraætt	Ættkvísl fiska
+Apatít	Apatít er tegund steinefna sem finnst meðal annars í glerungi tanna
+Laustik	Næturgali, fugl af þrastarætt
+Ógnarbíldur	Grimmt bjarndýr
+Í hím og ham	Orðatiltæki sem merkir að vera á báðum áttum
+Keyfa	Að ganga bunglamalega
+Speja	Fornt orð notað um að njósna. Dæmi: „Mörður spejaði um Njál."
+Gangari	Reiðhestur
+Transeyði	Kind með útstæðan neðri skolt
+Skálamöbur	Ættbálkur slímdýra
+Indúls	Innyfli (t.d. úr smokkfiski eða kolkrabba)
+Snöttungur	Gamalt orð yfir ræningja
+Rummungur	Stórtækur þjófur
+Stjarnmeiti	Djúpfiskur af djúpskeggjætt
+Terjulegur	Flókinn, sem erfitt er að greiða úr
+Snerrusnápur	Þrætugjarn náungi
+Ortóklas	Algengur steinn í storkubergi
+Spanga	Að faðma
+Kjusa	Húfa með uppmjórri hettu
+Skældingur	Lélegt skáld
+Gjáni	Kjáni
+Þaulast	Að vera lengi að einhverju
+Eftirmjölt	Síðasta mjólkin sem kemur úr spenum kýr
+Spégauti	Hnappagat
+Skjuð	Ská- eða hringsníðið stykki á flík
+Ákneiki	Skandall eða hneisa
+Snargöndull	Snurða á harðsnúnum þræði
+Adamsletur	Dulmál
+Sorghús	Safnaðarheimili shía-múslíma. Á arabísku: Hussainia.
+Rákahörvi	Mjög sjaldgæf tegund sæsnigla
+Salgófnir	Skáldlegt heiti yfir hana
+Munnmet	Ráð sem veitt er í fljótfærni
+Amía	Unnusta
+Lýflingur	Álfur
+Stigli	Lítill þrjónaður fleygur, saumaður í ermar og bol á peysu til að víkka handveginn.
+Dörsæfður	Að vera dörsæfður er að vera drepinn
+Pilslaki	Lélegt pils eða garmur
+Tröllepli	Nýyrði um melónu
+Rexín	Leðurlíki sem notað er við bókband
+Skúfagómur	Stórvaxin hákarlstegund
+Rangareyra	Efsti hluti bands í bát
+Kaplabrinki	Fuglinn svartbakur
+Pússandi	Stinningsvindur með snjókomu
+Dólpungur	Feitt barn
+Óbiðingur	Sá sem flýr af hólmi, sbr. bíður ekki.
+Líkaböng	Klukka sem hringt er við jarðarfarir
+Trys	Verðlaus hlutur. Dæmi: „Þetta er sko ekkert trys."
+Eljunströnd	Brjóst
+Fjalak	Hólf milli þils og veggjar
+Gyðla	Lirfa skordýrs sem tekur ófullkominna myndbreytingu
+Kramna	Að kvarta yfir einhverju
+Jónskoti	Vægt blótsyrði, sbr. déskoti
+Pimpsteinn	Byggingarsteinn úr vikri
+Skeftifletta	Spjót
+Piparlingur	Pípusveppstegund
+Skitinhæla	Kvenkynsútgáfa af orðinu skíthæll
+Stirsla	Fornt orð yfir afturenda
+Súkra	Gjaldmiðill Ekvadors
+Hindla	Ungur kvenhjörtur (hind)
+
+Næræta	Sá sem reynir að borða eingöngu mat sem framleiddur er í næsta nágrenni við hann
+Kavia	Skósíð kápa með stórum kraga sem var algeng ferðaföt karlmanna á 19. öld
+Láta síga á hömlu	Að róa hægt aftur á bak
+Kollindoðrulegur	Kollindoðrulegur er notað til að lýsa sviplausum manni
+Roðhundur	Lélegt spil. Dæmi: „Ég er með óttalega roðhunda á hendi."
+Darka	Að arka
+Friðgin	Foreldar og börn. Í ætt við orðin feðgin og mæðgin.
+Hýkorn	Dálítið af stuttu, mjúku hári
+Að gera einhverjum bróðolíur	Að valda einhverjum skaða
+Döddur	Eggjarauða
+Bekkjarýja	Borðtuska
+Að beita gemlingunum	Að láta tærnar standa út um göt á sokkunum
+Epjast	Að teygjast og aflagast, notað yfir föt og skó
+Fishæll	Hælsæri
+Páskabróðir	Fyrsti sunnudagur eftir páska
+Sauðamergur	Íslensk plöntutegund með bleikum blómum
+Riðari	Fornt orð sem merkir riddari
+Sinnóber	Rauð steintegund sem er sambland kvikasilfurs og brennisteins
+Jakobsland	Norðurhluti Spánar, þar sem Jakob postuli stundaði trúboð
+Tottlegur	Magur og laslegur
+Hurpa	Hrukkótt kerling
+Einbægslingur	Sverðfiskur
+Virgull	Hengingaról
+Tussi	Lítill poki
+Ræpingur	Það að slá gras á litlum dreifðum blettum
+Klonk	Að klonka er að herma eftir krunki hrafnsins en slíkt átti að boða rigningu
+Lækjarkatrín	Niðurgangur
+Pennaljómi	Maður með fallega rithönd
+Skussél	Horn eða skot í húsi
+Að vera eins og skitur á skjá	Að vera á sífellu flakki
+Spáða	Ung stúlka
+Peðringur	Eitthvað sem er dreift í smáum skömmtum. Dæmi: „Páll peðraði peningum sínum."
+Hélurani	Bjöllutegund af ranabjölluætt, algeng á Íslandi
+Sprettilræða	Stutt gamansaga
+Bómstur	Svellbunki
+Buffeit	Kinnhestur, þ.e. að slá einhvern utanundir
+Smergill	Óhreint og kornótt afbrigði gimsteins
+Freyðraður	Aðeins farinn að mygla
+Dringull	Lítill heybaggi
+Að vera upp á rasshöndina	Að vera örvhendur
+Gura	Vindhviða
+Kanabragð	Sérstakur hnútur, notaður til að binda reipí við stefni báts
+Raukn	Dráttardýr
+Rósm	Sorp
+Að bera bottatildi	Að kveða klámfengnar vísur
+Borra	Að hósta
+Seintíver	Latur maður sem mætir of seint til vinnu
+Svardónar	Forn þjóðflokkur Germana sem dýrkuðu gyðjuna Nerþus
+Damla	Nýstrokkuð smjörskaka
+Roket	Hvítur serkur með þröngum ermum
+Baggaeff	Sérstök gerð bókstafsins f í gamalli skrift
+Ötufær	Hestur sem er fær í hestaat
+Smykkjur	Litlir vettlingar
+Umbogi	Umhyggja
+Að grípa í rass á góðum degi	Að missa af góðu tækifæri
+Safali	Dýr af marðarætt sem lifir í Asíu og hefur mjög verðmætan feld
+Muntún	Konubrjóst
+Bréfafélagi	Meðlimur í félagi sem getur ekki mætt á fundi en fær samt útgáfurit félagsins
+Riðgála	Afbrigði af silungi
+Kon	Gamalt nýyrði fyrir gen
+Opinrass	Sá sem lokar ekki hurðum á eftir sér
+Skerlingur	Hálfvaxinn súluungi
+Glesja	Grind með ílátum fyrir salt og pipar
+Fjallafála	Óbekk ær sem leitar alltaf aftur upp til fjalla
+Blöndulókur	Horaður silungur
+Salún	Tegund vefnaðarvöru sem notuð er í rúmábreiður
+Apur	Apur þýðir kuldalegur eða bitur og er notað bæði um veður og skap
+Hreinbjálfi	Hreindýrsskinn
+Flóðflýtur	Gamalt heiti yfir fuglinn flórgoða
+Dont	Verk eða starf
+Pispónn	Annað orð yfir barrtréstegundina lindifuru
+Öndóttur	Sá sem sagður er öndóttur er grimmdarlegur
+Vígindi	Línur í viði
+Klektunarmaður	Maður sem er leiksoppur annorra
+Fá flatsóp	Að lenda í hrakningum
+Rympill	Sá sem er lítill í sér en mikill á lofti
+Semjukvísl	Knippi af taugum sem liggur frá höfði niður í rófubein
+Ingólfsdrekka	Sælindýr af drekkuætt
+Garnavindill	Súrsaður matur þar sem þarmar eru vafðir utan um ristilbúta
+Guddilon	Hálfgerður ræfill
+Ótili	Mikill fjöldi af einhverju, svo að segja 
+
+Að skíta á lásinn við einhvern	Að skipta sér af tali annarra
+Brísi	Eldur
+Drýsildrjóli	Hnykill eða eitthvað lítið
+Undirben	Flokkur sauðfjármarka
+Ígultanni	Björn
+Flikruvefari	Fiðrildi af vefarætt, algengt á sunnanverðu Íslandi og lifir á körfublómum
+Vaðkrumla	Sínadráttur í hendi
+Gulfurslegur	Eitthvað lausþrjónað eða úr grófu bandi
+Spínill	Hálfgagnsær gimsteinn með ýmsum litarafbrigðum
+Sestína	Órímaður og flókinn bragarháttur frá 12. öld sem er nær óbekktur á Íslandi
+Frónband	Hafið
+Bjannak	Blessun
+Kallsa	Að stinga upp á einhverju. Dæmi: „Ég kallsaði það við Gunnar að fara í sund."
+Gullapaldur	Appelsínutré
+Neppur	Feigur, sagt um þann sem er við það að deyja
+Boðbildur	Sérstakt mark í eyra kindar
+Fobrulegur	Hvumpinn
+Rófukjarni	Ákveðinn hluti heilans sem tilheyrir heilabotnskjörnum
+Hriki	Hávaxinn maður
+Bamlaður	Bæklaður
+Detthendur	Um bragarhátt sem hefur hnígandi hrynjandi
+Sjóli	Konungur
+Byxing	Harkaleg meðferð
+Bos	Hreiður eða bæli
+Að hefta hunda	Að híka í lestri
+Takfæð	Sama og fátækt, sett saman á annan hátt
+Snípuludda	Tegund af flugu sem lifir á því að sjúga blóð úr spendýrum og fuglum
+
+Kastarholubúskapur	Léleg eða frumstæð matreiðsla
+Drigli	Eitthvað rennandi blautt
+Mungát	Heimabruggaður bjór
+Stormfugl	Lítt notað nýyrði um albatross
+Skjákrummalegur	Er sá sem gleðst yfir öförum annarra
+Fémær	Kvenþræll
+Kókettera	Að daðra
+Skeiðrúm	Forngrisk mælieining, um 192 metrar
+Skylja	Súr mysa með uppleystum leifum af slátri eða svíðum sem legið hafa í henni
+Staffirugur	Einbeittur eða ákveðinn
+Díróið	Díróið þýðir „beint áfram"
+Skeggávaldi	Skeggávaldi var vera sem talin var verndari útilegumanna
+Vísendur	Frændur þess sem hefur vegið mann og eru skyldugir til að greiða bætur fyrir vigið
+Gandála	Fjörleg stelpa eða skepna
+Svartmari	Svört ský við hafsbrún
+Sprokverskur	Sá sem slettir útlendum orðum
+Fjaðrafokka	Kona sem er sífeldt á ferðinni
+Frumsafrumsa	Fyrsti kálfur sem kýr eignast
+Spóakríkur	Maður eða dýr með holdlítil læri
+Kapróna	Hetta á kápu
+Hortittur	Flís til að fylla í bil eða glufu á samskeytum
+Kötlutangi	Er syðsti tangi meginlands
+Blundskaka	Að skáskjóta augunum
+Fylgnivilla	Rökvilla þar sem haldið er fram að atburður sé orsök annars atburðar sem gerist samtímis.
+Brytjak	Kjötöxi
+Heimiskviður	Dómur heimilisfólks um einhvern á heimilinu
+Sólflúra	Fisktegund af flúruætt. Finnst ekki við Íslands.
+Spækja	Boginn trjábútur eða grein
+Stritla	Léleg mjólkurkýr
+Stím	Glíma eða bardagi
+Vösülfur	Maður sem atast í mörgu
+Freyjukettir	Ástarglampar í augum elskenda
+Dánumannstafl	Fornt tafl sem er spilað með þremur teningum
+Eggelningur	Ljár með egg sem er ein alin að lengd
+Drundhjassi	Feitur og rasspungur maður
+Skóþræll	Spýta með gati á öðrum enda sem hæll passar í. Notað til að ná af sér þröngum stígvélum.
+Náskári	Hrafn
+Kretíni	Maður sem fæddur er með óstarfhæfan skjaldkirtil og er af þeim sökum vanþroskaður
+Týhús	Vopnabúr
+Svaðhófur	Ruddalegur maður. Dæmi: „Árni er drullusokkur og svaðhófur."
+Nefönd	Hluti af nefholinu
+Skeribakur	Silungur sem vegna smæðar sinnar er hæfilegur í tvo bita
+Skírlifisnabbi	Lítil graftarbóla á hörundi manns
+Vaktela	Lynghæna
+Kampalampi	Rækjutegund sem algeng er við Ísland (á 50–700 metra dýpi)
+Simul	Tröllkona
+Ganga álbróka	Ganga örna sinna
+Ælingi	Smáfiskur
+Ósjötlaður	Fornt orð notað um það sem er óútkljáð, ekki er búið að setla
+Dagskjarr	Sá sem er dagskjarr er ljósfælinn, hann skirrist við degi
+Ordóvísíum	Eitt af sex tímabilum jarðsögunnar
+Starfsismátt	Vinnuföt
+Bekja	Nýyrði um bekken, skál fyrir þvag og hægðir sjúklings á sjúkrahúsi
+Álheimur	Í fornu skáldamáli er álheimur notað um hafið, þ.e.a.s. sá staður þar sem álar búa.
+
+
+
+
+
+
+
+
+
