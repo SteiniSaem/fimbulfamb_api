@@ -109,7 +109,7 @@ Brunaeimingur	Ískaldur vindur
 Lagsm	Félagi, samanber lagsmaður
 Krinólína	Vítt pils sem banið er út með grind eða gjörð
 Yps	Neðsti hluti baks. Samheiti „ufs“.
-Slófremi	Seint og um síðir. Dæmi: „Slófremi fékk ég bakkað frænda mínum aðstoðina.“
+Slófremi	Seint og um síðir. Dæmi: „Slófremi fékk ég þakkað frænda mínum aðstoðina.“
 Dylminn	Kærulaus
 Skurðsl	Kjöt sem er skorið niður mjög smátt
 Tryppilsinnaður	Uppstökkur
