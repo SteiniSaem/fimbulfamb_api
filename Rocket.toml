@@ -7,4 +7,4 @@ allowed_origins = ["http://localhost:5173"]
 
 [release]
 address = "0.0.0.0"
-allowed_origins = ["http://192.168.3.42:82"]
+allowed_origins = ["http://89.17.128.150:82"]

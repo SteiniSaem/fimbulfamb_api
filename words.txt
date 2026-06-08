@@ -248,7 +248,6 @@ Rádýr	Dýrategund af ætt hjartardýra
 Köngulskot	Lítið skarð við heilaköngulinn
 Skjákrummi	Forvitinn maður
 Fársætandi	Óvinur
-
 Tísaldi	Smávaxinn maður
 Smiðmess	Eggjárn með tveimur handföngum
 Karthaus	Kaktus
@@ -492,7 +491,6 @@ Ordóvísíum	Eitt af sex tímabilum jarðsögunnar
 Starfsismátt	Vinnuföt
 Bekja	Nýyrði um bekken, skál fyrir þvag og hægðir sjúklings á sjúkrahúsi
 Álheimur	Í fornu skáldamáli er álheimur notað um hafið, þ.e.a.s. sá staður þar sem álar búa.
-
 Puðrureddi	Maður sem spilar sig sem stóran en er lítils verður í raun
 Steinfella	Gamalt nýyrði yfir mósakmynd
 Stóráni	Ánamaðkur sem getur orðið allt að 30 cm á lengd
