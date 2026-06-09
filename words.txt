@@ -58,7 +58,6 @@ Netbykkni	Þykkir en götóttir skýjaflókar
 Sópdyngja	Fornt orð yfir ruslahaug
 Sóri	Húðsjúkdómur sem kemur fram í bleikum hreistrugum flekkjum á húðinni
 Örglast	Að rísa upp með erfiðismunum
-
 Sjafni	Brúðgumi
 Hlutaskítur	Sá sem skiptir sér af því sem honum kemur ekki við
 Sönhattur	Bragarháttur sem einkennir sonettur
@@ -527,3 +526,75 @@ Tatteygður	Með hvasst augnaráð
 Flughani	Fljótfær maður sem er veikur fyrir freistingum
 Densilegur	Snyrtilegur
 Simbalom	Strengjahljóðfæri sem leikið er á með tréhömrum. Upprunnið í Ungverjalandi.
+Reik	Skipting í hári
+Valskur	Franskur
+Ilþorn	Kló á rándýri eða ránfugli
+Drógsyrna	Hægfara maður
+Þjasalegur	Letilegur. Þjasi er letingi.
+Jólna sumbl	Skáldamjöður
+Klúkna	Að kafna
+Gnæfingi	Nýyrði yfir gíraffa, af sögnínni að gnæfa (hefur ekki náð fótfestu í málinu)
+Kisukló	Gleym-mér-ei
+Fallastakkur	Spik á kvíði hvals
+Kaupamannastjarna	Kvöldstjarna sem kemur upp eftir sólsetur seinni hluta sumars. Er merki um lok vinnutíma
+Ósæi	Handanheimur eða ósýnilegur heimur
+Posasnigill	Lítill poki
+Innanskömm	Vægur magaverkur
+Komast á þrefa	Að berast í tal
+Mænuskúm	Himna sem er utan um mænuna
+Eskingur	Fingert fjúk, skafrenningur
+Kattarbalsam	Íslensk plöntutegund, einnig nefnd hrafnaklukka
+Fangbrekka	Staður þar sem glímukeppni fer fram
+Óska tjöld	Óski er Óðinsheiti og Óska tjöld merkir skjöldur
+Veðratoslegur	Mjósleginn og vesældarlegur
+Korhnúsa	Dútla eða nostra við eitthvað
+Aldarþopti	Æskuvinur
+Fyrva	Að fjara út
+Loftsveifa	Loftsteinn eða annað fyrirbæri sem sést svífa á lofti
+Rakasáta	Síðasta barn hjóna
+Stum	Ryk á húsgögnum
+Belúdator	Annað nafn yfir Bagdad
+Hóbiti	Ákveðið eyrnamark á sauðfé
+Riðfaðmur	Útgáfa af mælieiningunni faðmi. Mæld með því að teygja út hendur og halla sér til beggja hliða.
+Bullibak	Uppstökkur og hávær maður
+Þveljusteinn	Notað yfir ymsar bergtegundir sem auðvelt er að tálga til
+Fitleiki	Bilið milli ugga og sporðs á flyðru
+Válerast	Að væflast eða snúast í einhverju
+Bala	Að tóra eða endast vel. Dæmi: Ótrúlegt hvað þessi kanna hefur balað svona sprungin.
+Síuþynna	Hluti af beini í nefholinu
+Sóttarfönn	Ákóf skita í sauðfé
+Skotra	Niðurgangur, sbr. skita
+Hilpir	Fornt orð yfir ljósmóður
+Kunkteis	Greifynja, úr ensku: countess
+Smeira	Felti úr selskinni
+Lókátur	Aðstoðarkennari við háskóla
+Hildingur	Konungur
+Hvatabúss	Fljótfær maður
+Rosmhvalur	Rostungur
+Soffa	Þunnt deig
+Pistuli	Pistill
+Lurða	Lítils háttar slappleiki eða slen
+Bruði	Rekaviðardrumbur, óreglulegur í laginu
+Iktsýki	Liðagigt
+Gýgjarpúss	Nafn nokkurra tegunda af sæsveppum
+Sikill	Mynt og þyngdareining hjá gyðingum að fornu (um 17 grömm)
+Hnauk	Erfiðisvinna, strit
+Brautingi	Flakkari
+Púðurvasi	Smávaxinn maður
+Skulfa	Úrhellisrigning í hvassviðri
+Óðindæla	Ógæfa eða vandræði
+Nirtinturta	Sá sem hefur yfirborðskennda þekkingu
+Klauflax	Dulnefni um kjöt, notað á föstu meðan ekki mátti leggja sér kjöt til munns
+Bónmeri	Tæki til að bóna gólf
+Dölfugl	Maður sem er sólginn í að spila á spil
+Stefnivargur	Ærslamikill krakkahópur
+Olnbogasveppur	Vökvi sem myndast í slímsekk á liðamötum hests
+Holtvartarir	Fornt orð yfir snák
+Völsteypa	Það að brýna bit úr hníf
+Saktmóðigur	Hógvær maður eða kona
+Fúkáti	Geðstirður maður
+Hrakballa	Að lappa upp á
+Freyjufár	Kynsjúkdómur
+Masgepill	Maður sem blaðrar mikið
+Spadilía	Spaðaásinn í þriggja manna spilinu lomber
+Riddarapissa	Það þegar mátað er með riddara á meðan köngurinn er innikróaður í horni skákborðsins
