@@ -418,6 +418,52 @@ fn ping(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Js
     Ok(Json(true))
 }
 
+#[derive(Deserialize)]
+struct ReorderPlayersRequest {
+    players: Vec<String>
+}
+
+#[put("/reorderPlayers/<id>", data="<body>")]
+fn reorder_players(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: Json<ReorderPlayersRequest>) -> Result<Json<Vec<Player>>, (Status, String)> {
+    let mut games = get_games(&games)?;
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+
+    let new_order = &body.players;
+
+    match game.reorder_players(new_order) {
+        Ok(_) => return Ok(Json(game.players.clone())),
+        Err(err) => return Err((Status::InternalServerError, format!("{}", err)))
+    }
+}
+
+#[put("/setCurrentPlayer/<id>/<name>")]
+fn set_current_player(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, name: &str) -> Result<(), (Status, String)> {
+    let mut games = get_games(&games)?;
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+
+    match game.set_current_player(name){
+        Ok(_) => {
+            match game.get_next_word() {
+                Ok(_) => (),
+                Err(err) => return Err((Status::InternalServerError, format!("{}", err)))
+            };
+            if game.word_is_visible {
+                let _ = game.tx.send(format!("Next Round\t{}\t{}", name, game.get_current_word().word));
+            } else {
+                let _ = game.tx.send(format!("Next Round\t{}", name));
+            }
+            Ok(())
+        },
+        Err(err) => return Err((Status::InternalServerError, format!("{}", err)))
+    }
+}
+
 #[delete("/endGame/<id>")]
 fn end_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<String, (Status, String)> {
     let mut games = get_games(&games)?;
@@ -507,6 +553,8 @@ async fn main() {
             submit_definition,
             update_scores,
             get_game_state,
+            reorder_players,
+            set_current_player,
             game_ws
         ])
         .launch()

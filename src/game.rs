@@ -110,6 +110,16 @@ impl Game {
         };
     }
 
+    pub fn get_next_word(&mut self) -> Result<(), String> {
+        if self.current_word_index == self.word_pool.len() -1 {
+            return Err(String::from("Öll orð búin"))
+        }
+        else {
+            self.current_word_index += 1
+        }
+        Ok(())
+    }
+
     pub fn next_round(&mut self) -> Result<(), String> {
         if self.current_player_index == self.players.len() - 1 {
             self.current_player_index = 0;
@@ -117,12 +127,8 @@ impl Game {
             self.current_player_index += 1;
         }
 
-        if self.current_word_index == self.word_pool.len() -1 {
-            return Err(String::from("Öll orð búin"))
-        }
-        else {
-            self.current_word_index += 1
-        }
+        self.get_next_word()?;
+
         self.open_for_submissions = true;
 
         match self.score_history.last() {
@@ -186,6 +192,42 @@ impl Game {
             Ok(n) => n.as_secs(),
             Err(_) => panic!("SystemTime before UNIX EPOCH!"),
         };
+    }
+
+    pub fn reorder_players(&mut self, new_order: &Vec<String>) -> Result<(), String>  {
+        if new_order.len() != self.players.len() {
+            return Err(String::from("Villa kom upp við endurröðun leikmanna"))
+        }
+        
+        let mut new_player_list: Vec<Player> = vec![];
+
+        let current_player = self.get_current_player();
+
+        for name in new_order {
+            let idx = match self.players.iter().position(|p| &p.name == name){
+                Some(i) => i,
+                None => return Err(String::from("Villa kom upp við endurröðun leikmanna"))
+            };
+
+            new_player_list.push(self.players[idx].clone());
+        }
+
+        self.players = new_player_list;
+        self.current_player_index = match self.players.iter().position(|p| p.name == current_player ){
+            Some(i) => i,
+            None => return Err(String::from("Villa kom upp við endurröðun leikmanna"))
+        };
+
+        Ok(())
+    }
+
+    pub fn set_current_player(&mut self, name: &str) -> Result<(), String>{
+        self.current_player_index = match self.players.iter().position(|p| p.name == name ){
+            Some(i) => i,
+            None => return Err(format!("Villa kom upp við að gefa {} orðið", name))
+        };
+
+        Ok(())
     }
 }
 
