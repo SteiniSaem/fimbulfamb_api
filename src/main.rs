@@ -243,9 +243,8 @@ async fn get_game_state<'a>(id: &str, username: &str, games: &State<Arc<Mutex<Ha
         None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
 
-    println!("{} - {}", &game.get_current_player(), username);
-    if &game.get_current_player() == username {
-        println!("this is the current player")
+    if !game.is_player_in_game(username) {
+        return Err((Status::Forbidden, format!("Þér hefur verið hent úr þessum leik")))
     }
 
     let response: GameStateResponse = GameStateResponse {

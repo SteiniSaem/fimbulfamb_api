@@ -229,6 +229,13 @@ impl Game {
 
         Ok(())
     }
+
+    pub fn is_player_in_game(&self, name: &str) -> bool {
+        match self.players.iter().find(|p| p.name == name) {
+            Some(_) => true,
+            None => false
+        }
+    }
 }
 
 
