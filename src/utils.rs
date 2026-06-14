@@ -11,6 +11,12 @@ pub struct Word {
     pub definition: String//definitions: Vec<String>,
 }
 
+impl Word {
+    pub fn empty() -> Word {
+        return Word { word: String::new(), definition: String::new()}
+    }
+}
+
 pub fn read_words_and_definitions_from_file(file_path: &str) -> Vec<Word> {
     let mut words: Vec<Word> = Vec::new();
 

@@ -208,7 +208,7 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
             owner: game.owner.clone(),
             players: game.players.clone(),
             current_player: game.get_current_player(),
-            player_definitions: game.player_definitions.clone(),
+            player_definitions: if username == &game.get_current_player() { game.player_definitions.clone() } else { vec![] },
             current_word: current_word,
             joinable: game.joinable,
             has_started: game.has_started,
@@ -220,6 +220,46 @@ fn join_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str, body: J
     else {
         return Err((Status::Forbidden, format!("Leikur lokaður")))
     }
+}
+
+
+#[derive(Serialize)]
+struct GameStateResponse {
+    owner: String,
+    players: Vec<Player>,
+    current_player: String,
+    player_definitions: Vec<Definition>,
+    current_word: Word,
+    joinable: bool,
+    has_started: bool,
+    open_for_submissions: bool,
+}
+
+#[get("/gameState/<id>/<username>")]
+async fn get_game_state<'a>(id: &str, username: &str, games: &State<Arc<Mutex<HashMap<String, Game>>>>) -> Result<Json<GameStateResponse>, (Status, String)> {
+    let games = get_games(&games)?;
+    let game = match games.get(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+
+    println!("{} - {}", &game.get_current_player(), username);
+    if &game.get_current_player() == username {
+        println!("this is the current player")
+    }
+
+    let response: GameStateResponse = GameStateResponse {
+        owner: game.owner.clone(),
+        players: game.players.clone(),
+        current_player: game.get_current_player(),
+        player_definitions: if &game.get_current_player() == username { game.player_definitions.clone() } else { vec![] },
+        current_word: if game.word_is_visible || &game.get_current_player() == username { game.get_current_word() } else { Word::empty() },
+        joinable: game.joinable,
+        has_started: game.has_started,
+        open_for_submissions: game.open_for_submissions,
+    };
+
+    Ok(Json(response))
 }
 
 
@@ -381,6 +421,12 @@ fn ping(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<Js
 #[delete("/endGame/<id>")]
 fn end_game(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Result<String, (Status, String)> {
     let mut games = get_games(&games)?;
+    let game = match games.get_mut(id) {
+        Some(g) => g,
+        None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
+    };
+
+    let _ = game.tx.send(String::from("End game"));
     games.remove_entry(id);
     Ok(id.to_string())
 }
@@ -402,7 +448,6 @@ async fn game_ws<'a>(id: &str, ws: rocket_ws::WebSocket, games: &State<Arc<Mutex
         Ok(())
     })))
 }
-
 
 #[rocket::main]
 async fn main() {
@@ -461,6 +506,7 @@ async fn main() {
             ping,
             submit_definition,
             update_scores,
+            get_game_state,
             game_ws
         ])
         .launch()

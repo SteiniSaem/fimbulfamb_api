@@ -180,7 +180,7 @@ Dorri	Hrútur
 Hispursmey	Tilgerðarleg stelpa klædd í nýjustu tísku
 Balgeira	Að strita við eitthvað
 Holubrjóst	Inndregin geirvarta
-Krústa	Ör efter bólu
+Krústa	Ör eftir bólu
 Fornbæra	Kýr sem ber fyrir hálfu ári
 Brautlaga	Það að flytja skip baðan sem það hefur legið um tíma
 Glerkunta	Skegghjungur á unglingum
