@@ -130,6 +130,7 @@ impl Game {
         self.get_next_word()?;
 
         self.open_for_submissions = true;
+        self.player_definitions.clear();
 
         match self.score_history.last() {
             Some(r) => {
