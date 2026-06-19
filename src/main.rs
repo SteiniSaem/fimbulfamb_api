@@ -63,8 +63,11 @@ fn next_word(games: &State<Arc<Mutex<HashMap<String, Game>>>>, id: &str) -> Resu
         None => return Err((Status::NotFound, format!("Enginn leikur með kóða {}", id)))
     };
 
+    game.player_definitions.clear();
+
     match game.next_word() {
         Ok(w) => {
+            let _ = game.tx.send(format!("New word"));
             if game.word_is_visible {
                 let _ = game.tx.send(format!("Show word\t{}", w.word));
             }
