@@ -237,7 +237,7 @@ Riðanæli	Fiskseiði
 Glermey	Undirættbálkur skordýra af ættbálki vogvængna
 Steylur	Langir og klunnalegir fætur
 Kakbretta	Mjúkur ostur
-Kantilía	Silfrað eða gyllt band úr virbrœði sem notað er við útsaum
+Kantilía	Silfrað eða gyllt band úr vírþræði sem notað er við útsaum
 Mýeldur	Mikið af einhverju
 Gerling	Smit eða sýking
 Fílipus	Er gæluheiti á núllvalda fylki í stærðfræði: 2x2 fylki með núll í öllum reitum nema einum.
@@ -264,17 +264,17 @@ Kafhriða	Útblásinn hákarlsmagi
 Dörslag	Sigti
 Drekakollur	Ættkvísl innan varablómaættar
 Ófeigseyru	Holdsepar við hjartarætur sláturdýra
-Fylkja hamalt	Að raða herliði upp bannig að skjöldur nemi við skjöld
+Fylkja hamalt	Að raða herliði upp þannig að skjöldur nemi við skjöld
 Stílhyrna	Nabbi sem skagar út úr beini
 Hveita	Myrkfælni
 Trinta	Klettadrangur eða -strýta
-Þallarbróðir	Hávaxið, sígrænt tré af ballarætt
+Þallarbróðir	Hávaxið, sígrænt tré af þallarætt
 Urraraætt	Ættkvísl fiska
 Apatít	Apatít er tegund steinefna sem finnst meðal annars í glerungi tanna
 Laustik	Næturgali, fugl af þrastarætt
 Ógnarbíldur	Grimmt bjarndýr
 Í hím og ham	Orðatiltæki sem merkir að vera á báðum áttum
-Keyfa	Að ganga bunglamalega
+Keyfa	Að ganga þunglamalega
 Speja	Fornt orð notað um að njósna. Dæmi: „Mörður spejaði um Njál."
 Gangari	Reiðhestur
 Transeyði	Kind með útstæðan neðri skolt
