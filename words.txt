@@ -391,7 +391,7 @@ Kon	Gamalt nýyrði fyrir gen
 Opinrass	Sá sem lokar ekki hurðum á eftir sér
 Skerlingur	Hálfvaxinn súluungi
 Glesja	Grind með ílátum fyrir salt og pipar
-Fjallafála	Óbekk ær sem leitar alltaf aftur upp til fjalla
+Fjallafála	Óþekk ær sem leitar alltaf aftur upp til fjalla
 Blöndulókur	Horaður silungur
 Salún	Tegund vefnaðarvöru sem notuð er í rúmábreiður
 Apur	Apur þýðir kuldalegur eða bitur og er notað bæði um veður og skap
@@ -418,7 +418,7 @@ Flikruvefari	Fiðrildi af vefarætt, algengt á sunnanverðu Íslandi og lifir �
 Vaðkrumla	Sínadráttur í hendi
 Gulfurslegur	Eitthvað lausþrjónað eða úr grófu bandi
 Spínill	Hálfgagnsær gimsteinn með ýmsum litarafbrigðum
-Sestína	Órímaður og flókinn bragarháttur frá 12. öld sem er nær óbekktur á Íslandi
+Sestína	Órímaður og flókinn bragarháttur frá 12. öld sem er nær óþekktur á Íslandi
 Frónband	Hafið
 Bjannak	Blessun
 Kallsa	Að stinga upp á einhverju. Dæmi: „Ég kallsaði það við Gunnar að fara í sund."
