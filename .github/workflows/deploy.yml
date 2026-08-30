@@ -15,7 +15,6 @@ jobs:
       - name: Install Rust target for Pi
         run: |
           rustup target add armv7-unknown-linux-musleabihf
-          sudo apt-get install -y gcc-arm-linux-musleabihf
 
       - name: Install cross
         run: cargo install cross --locked --version 0.2.5
