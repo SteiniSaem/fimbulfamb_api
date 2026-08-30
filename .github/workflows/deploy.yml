@@ -14,14 +14,14 @@ jobs:
 
       - name: Install Rust target for Pi
         run: |
-          rustup target add armv7-unknown-linux-gnueabihf
-          sudo apt-get install -y gcc-arm-linux-gnueabihf
+          rustup target add armv7-unknown-linux-musleabihf
+          sudo apt-get install -y gcc-arm-linux-musleabihf
 
       - name: Install cross
-        run: cargo install cross --git https://github.com/cross-rs/cross
+        run: cargo install cross --locked --version 0.2.5
 
       - name: Build
-        run: cross build --release --target armv7-unknown-linux-gnueabihf
+        run: cross build --release --target armv7-unknown-linux-musleabihf
 
       - name: Upload to Pi
         uses: appleboy/scp-action@v1.0.0
@@ -29,7 +29,7 @@ jobs:
           host: ${{ secrets.PI_HOST }}
           username: ${{ secrets.PI_USER }}
           key: ${{ secrets.PI_SSH_KEY }}
-          source: target/armv7-unknown-linux-gnueabihf/release/fimbulfamb_api,Rocket.toml,words.txt
+          source: target/armv7-unknown-linux-musleabihf/release/fimbulfamb_api,Rocket.toml,words.txt
           target: ~/APIs/fimbulfamb_api
 
       - name: Restart service
